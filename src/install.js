@@ -487,9 +487,11 @@ async function createWelcomePost() {
     }
 }
 
+
 async function enableDefaultPlugins() {
     console.log('Enabling default plugins');
 
+    // Type: string[]
     let defaultEnabled = [
         'nodebb-plugin-composer-default',
         'nodebb-plugin-markdown',
@@ -498,9 +500,13 @@ async function enableDefaultPlugins() {
         'nodebb-rewards-essentials',
         'nodebb-plugin-emoji',
         'nodebb-plugin-emoji-android',
+        'nodebb-plugin-dbsearch',
     ];
+
+    // Type: string[].
     let customDefaults = nconf.get('defaultplugins') || nconf.get('defaultPlugins');
 
+    // Type: none.
     winston.info(`[install/defaultPlugins] customDefaults ${String(customDefaults)}`);
 
     if (customDefaults && customDefaults.length) {
@@ -517,8 +523,13 @@ async function enableDefaultPlugins() {
 
     winston.info('[install/enableDefaultPlugins] activating default plugins', defaultEnabled);
 
+    // Type: any
     const db = require('./database');
+
+    // Type: number[]
     const order = defaultEnabled.map((plugin, index) => index);
+
+    // Type: any
     await db.sortedSetAdd('plugins:active', order, defaultEnabled);
 }
 
