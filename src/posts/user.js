@@ -3,6 +3,7 @@
 const async = require('async');
 const validator = require('validator');
 const _ = require('lodash');
+const assert = require('assert');
 
 const db = require('../database');
 const user = require('../user');
@@ -99,7 +100,13 @@ module.exports = function (Posts) {
         return groupsMap;
     }
 
+    // getUserData(uids : Array<number>, uid : number) : Promise<
     async function getUserData(uids, uid) {
+        assert(Array.isArray(uids));
+        for (let i = 0; i < uids.length; i++) {
+            assert(typeof uids[i] === 'number');
+        }
+        assert(typeof uid === 'number');
         const fields = [
             'uid', 'username', 'fullname', 'userslug',
             'reputation', 'postcount', 'topiccount', 'picture',
