@@ -83,6 +83,16 @@
             <span component="post/bookmark-count" class="bookmarkCount badge" data-bookmarks="{posts.bookmarks}">{posts.bookmarks}</span>&nbsp;
         </a>
     </li>
+
+    <li>
+        <a component="post/anonymous" role="menuitem" tabindex="-1" href="#" data-anonymized="{posts.anonymized}">
+            <span class="menu-icon">
+                <i component="post/anonymous/off" class="fa fa-fw fa-user <!-- IF !posts.anonymized -->hidden<!-- ENDIF !posts.anonymized -->"></i>
+                <i component="post/anonymous/on" class="fa fa-fw fa-user-secret <!-- IF posts.anonymized -->hidden<!-- ENDIF posts.anonymized -->"></i>
+            </span>
+            <span class="anonymous-text">[[topic:Anonymize]]</span>
+        </a>
+    </li>
     {{{ end }}}
 
     <li>

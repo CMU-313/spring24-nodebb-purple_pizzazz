@@ -63,8 +63,9 @@ define('forum/topic/postTools', [
 
     PostTools.toggle = function (pid, isDeleted) {
         const postEl = components.get('post', 'pid', pid);
+        console.log("toggle");
 
-        postEl.find('[component="post/quote"], [component="post/bookmark"], [component="post/reply"], [component="post/flag"], [component="user/chat"]')
+        postEl.find('[component="post/quote"], [component="post/bookmark"], [component="post/anonymous"], [component="post/reply"], [component="post/flag"], [component="user/chat"]')
             .toggleClass('hidden', isDeleted);
 
         postEl.find('[component="post/delete"]').toggleClass('hidden', isDeleted).parent().attr('hidden', isDeleted ? '' : null);
@@ -113,10 +114,34 @@ define('forum/topic/postTools', [
         });
 
         postContainer.on('click', '[component="post/bookmark"]', function () {
+            console.log("Click post/bookmark");
+
             return bookmarkPost($(this), getData($(this), 'data-pid'));
         });
 
+        postContainer.on('click', '[component="post/anonymous"]', function () {
+            console.log("postContainer");
+
+
+            var textSpan = $(this).find('.anonymous-text');
+            // Toggle the text
+            if (textSpan.text() === "Anonymize") {
+                textSpan.text("Unanonymize");
+            } else {
+                textSpan.text("Anonymize");
+            }
+        
+            // return toggleAnonymous($(this), getData($(this), 'data-pid'));
+            var iconOff = $(this).find('[component="post/anonymous/off"]');
+            var iconOn = $(this).find('[component="post/anonymous/on"]');
+            
+            // Toggle the visibility of the icons
+            iconOff.toggleClass('hidden');
+            iconOn.toggleClass('hidden');
+        });
+
         postContainer.on('click', '[component="post/upvote"]', function () {
+            console.log("upvote");
             return votes.toggleVote($(this), '.upvoted', 1);
         });
 
@@ -352,6 +377,7 @@ define('forum/topic/postTools', [
     }
 
     function bookmarkPost(button, pid) {
+        console.log("bookmarkPost");
         const method = button.attr('data-bookmarked') === 'false' ? 'put' : 'del';
 
         api[method](`/posts/${pid}/bookmark`, undefined, function (err) {
@@ -363,6 +389,26 @@ define('forum/topic/postTools', [
         });
         return false;
     }
+
+    function toggleAnonymous(button, pid) {
+        console.log("toggleAnonymous");
+
+        const method = button.attr('data-anonymized') === 'false' ? 'put' : 'del';
+
+        console.log(method);
+        
+        api[method](`/posts/${pid}/anonymous`, undefined, function (err) {
+            if (err) {
+                console.log("if err");
+                // return alerts.error(err);
+            }
+            const type = method === 'put' ? 'setAnonymous' : 'unsetAnonymous';
+            hooks.fire(`action:post.${type}`, { pid: pid });
+            console.log("hooks.fire");
+        });
+        return false;
+    }
+    
 
     function getData(button, data) {
         return button.parents('[data-pid]').attr(data);
