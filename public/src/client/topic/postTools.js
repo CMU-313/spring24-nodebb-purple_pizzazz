@@ -374,7 +374,6 @@ define('forum/topic/postTools', [
             textSpan.text('Anonymize');
             var actualUsername = $('[itemprop="author"]').data('username');
             console.assert(typeof actualUsername === 'string', 'Invalid actualUsername type');
-            console.log('2')
             $('[itemprop="author"]').text(actualUsername);
         }
 
