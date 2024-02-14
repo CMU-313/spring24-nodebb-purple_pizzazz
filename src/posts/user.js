@@ -103,7 +103,7 @@ module.exports = function (Posts) {
     // getUserData(uids : Array<number>, uid : number) : Promise<
     async function getUserData(uids, uid) {
         assert(Array.isArray(uids));
-        if (uids.length != 0) {
+        if (uids.length !== 0) {
             assert(typeof uids[0] === 'number');
         }
         // assert(typeof uid === 'number');
