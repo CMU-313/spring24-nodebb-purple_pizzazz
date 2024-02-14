@@ -114,32 +114,37 @@ define('forum/topic/postTools', [
         });
 
         postContainer.on('click', '[component="post/bookmark"]', function () {
-            console.log("Click post/bookmark");
-
             return bookmarkPost($(this), getData($(this), 'data-pid'));
         });
-
+        //Used ChatGPT to help write code
         postContainer.on('click', '[component="post/anonymous"]', function () {
-            console.log("postContainer");
-
-
+            // Find the text span element within the clicked button
             var textSpan = $(this).find('.anonymous-text');
+            
             // Toggle the text
             if (textSpan.text() === "Anonymize") {
                 textSpan.text("Unanonymize");
+                // Update the username to "Anonymous"
+                $('[itemprop="author"]').text("Anonymous");
             } else {
                 textSpan.text("Anonymize");
+                // Update the username back to the actual username
+                var actualUsername = $('[itemprop="author"]').data("username");
+                $('[itemprop="author"]').text(actualUsername);
             }
         
-            // return toggleAnonymous($(this), getData($(this), 'data-pid'));
+            // Find the icons within the clicked button
             var iconOff = $(this).find('[component="post/anonymous/off"]');
             var iconOn = $(this).find('[component="post/anonymous/on"]');
             
             // Toggle the visibility of the icons
             iconOff.toggleClass('hidden');
             iconOn.toggleClass('hidden');
+            
+            // Prevent the default link behavior
+            return false;
         });
-
+        
         postContainer.on('click', '[component="post/upvote"]', function () {
             console.log("upvote");
             return votes.toggleVote($(this), '.upvoted', 1);
