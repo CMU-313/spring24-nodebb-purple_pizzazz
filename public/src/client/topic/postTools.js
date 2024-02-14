@@ -63,8 +63,6 @@ define('forum/topic/postTools', [
 
     PostTools.toggle = function (pid, isDeleted) {
         const postEl = components.get('post', 'pid', pid);
-        console.log("toggle");
-
         postEl.find('[component="post/quote"], [component="post/bookmark"], [component="post/anonymous"], [component="post/reply"], [component="post/flag"], [component="user/chat"]')
             .toggleClass('hidden', isDeleted);
 
@@ -116,37 +114,18 @@ define('forum/topic/postTools', [
         postContainer.on('click', '[component="post/bookmark"]', function () {
             return bookmarkPost($(this), getData($(this), 'data-pid'));
         });
-        //Used ChatGPT to help write code
-        postContainer.on('click', '[component="post/anonymous"]', function () {
-            // Find the text span element within the clicked button
-            var textSpan = $(this).find('.anonymous-text');
-            
-            // Toggle the text
-            if (textSpan.text() === "Anonymize") {
-                textSpan.text("Unanonymize");
-                // Update the username to "Anonymous"
-                $('[itemprop="author"]').text("Anonymous");
-            } else {
-                textSpan.text("Anonymize");
-                // Update the username back to the actual username
-                var actualUsername = $('[itemprop="author"]').data("username");
-                $('[itemprop="author"]').text(actualUsername);
-            }
-        
-            // Find the icons within the clicked button
-            var iconOff = $(this).find('[component="post/anonymous/off"]');
-            var iconOn = $(this).find('[component="post/anonymous/on"]');
-            
-            // Toggle the visibility of the icons
-            iconOff.toggleClass('hidden');
-            iconOn.toggleClass('hidden');
-            
-            // Prevent the default link behavior
-            return false;
+
+        /**
+         * Attaches event listener to handle anonymize/unanonymize button clicks.
+         * @param {jQuery.Event} event - The click event.
+         * @returns {boolean} - Returns false to prevent the default link behavior.
+         */
+        postContainer.on('click', '[component="post/anonymous"]', function (event) {
+            console.assert(event instanceof jQuery.Event, 'Invalid event parameter');
+            return anonymizePost($(this));
         });
-        
+
         postContainer.on('click', '[component="post/upvote"]', function () {
-            console.log("upvote");
             return votes.toggleVote($(this), '.upvoted', 1);
         });
 
@@ -381,8 +360,36 @@ define('forum/topic/postTools', [
         return { text: selectedText, pid: selectedPid, username: username };
     }
 
+    // Used ChatGPT to help write code and type annotations
+    function anonymizePost(button) {
+        // Find the text span element within the clicked button
+        var textSpan = button.find('.anonymous-text');
+        console.assert(textSpan instanceof jQuery, 'Invalid textSpan type');
+
+        // Toggle the text
+        if (textSpan.text() === 'Anonymize') {
+            textSpan.text('Unanonymize');
+            $('[itemprop="author"]').text('Anonymous');
+        } else {
+            textSpan.text('Anonymize');
+            var actualUsername = $('[itemprop="author"]').data('username');
+            console.assert(typeof actualUsername === 'string', 'Invalid actualUsername type');
+            console.log('2')
+            $('[itemprop="author"]').text(actualUsername);
+        }
+
+        // Find the icons within the clicked button
+        var iconOff = button.find('[component="post/anonymous/off"]');
+        var iconOn = button.find('[component="post/anonymous/on"]');
+
+        console.assert(iconOff instanceof jQuery && iconOn instanceof jQuery, 'Invalid icon type');
+        // Toggle the visibility of the icons
+        iconOff.toggleClass('hidden');
+        iconOn.toggleClass('hidden');
+        return false;
+    }
+
     function bookmarkPost(button, pid) {
-        console.log("bookmarkPost");
         const method = button.attr('data-bookmarked') === 'false' ? 'put' : 'del';
 
         api[method](`/posts/${pid}/bookmark`, undefined, function (err) {
@@ -394,26 +401,6 @@ define('forum/topic/postTools', [
         });
         return false;
     }
-
-    function toggleAnonymous(button, pid) {
-        console.log("toggleAnonymous");
-
-        const method = button.attr('data-anonymized') === 'false' ? 'put' : 'del';
-
-        console.log(method);
-        
-        api[method](`/posts/${pid}/anonymous`, undefined, function (err) {
-            if (err) {
-                console.log("if err");
-                // return alerts.error(err);
-            }
-            const type = method === 'put' ? 'setAnonymous' : 'unsetAnonymous';
-            hooks.fire(`action:post.${type}`, { pid: pid });
-            console.log("hooks.fire");
-        });
-        return false;
-    }
-    
 
     function getData(button, data) {
         return button.parents('[data-pid]').attr(data);
