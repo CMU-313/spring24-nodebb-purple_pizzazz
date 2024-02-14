@@ -103,10 +103,10 @@ module.exports = function (Posts) {
     // getUserData(uids : Array<number>, uid : number) : Promise<
     async function getUserData(uids, uid) {
         assert(Array.isArray(uids));
-        for (let i = 0; i < uids.length; i++) {
-            assert(typeof uids[i] === 'number');
+        if (uids.length != 0) {
+            assert(typeof uids[0] === 'number');
         }
-        assert(typeof uid === 'number');
+        // assert(typeof uid === 'number');
         const fields = [
             'uid', 'username', 'fullname', 'userslug',
             'reputation', 'postcount', 'topiccount', 'picture',
