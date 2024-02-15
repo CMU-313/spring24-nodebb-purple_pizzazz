@@ -24,13 +24,13 @@
                     <tr>
                         <th align="left">
                             <a href="https://github.com/CMU-313/spring24-nodebb-purple_pizzazz/commits?author=pyrevoid15&since=2024-01-20T00:00:00-05:00&until=2024-03-29T23:59:00-05:00">
-                            Commit: 2
+                            Commit: 3
                             </a>
                         </th>
                     </tr>
                     <tr>
                         <th align="left">
-                            Addition: 11
+                            Addition: 12
                         </th>
                     </tr>
                     <tr>
@@ -180,7 +180,7 @@
                     <tr>
                     <tr>
                         <th align="left">
-                            Comments: 1
+                            Comments: 2
                         </th>
                     <tr>
                 </table>
@@ -306,7 +306,7 @@
                     <tr>
                     <tr>
                         <th align="left">
-                            Comments: 2
+                            Comments: 3
                         </th>
                     <tr>
                 </table>
