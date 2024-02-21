@@ -80,7 +80,7 @@ define('search', ['translator', 'storage', 'hooks', 'alerts'], function (transla
             return;
         }
 
-        const searchOptions = Object.assign({ in: config.searchDefaultInQuick || 'titles' }, options.searchOptions);
+        const searchOptions = Object.assign({ in: config.searchDefaultInQuick || 'titles-posts' }, options.searchOptions);
         const quickSearchResults = options.searchElements.resultEl;
         const inputEl = options.searchElements.inputEl;
         let oldValue = inputEl.val();
