@@ -189,7 +189,18 @@ module.exports = function (Posts) {
         const postData = await Posts.getPostFields(pid, ['pid', 'uid', 'tid']);
         const newReputation = await user.incrementUserReputationBy(postData.uid, type === 'upvote' ? 1 : -1);
 
-        await adjustPostVotes(postData, uid, type, unvote);
+        const userData = await user.getUserData(uid);
+        const isInstructor = (userData.accounttype === 'instructor');
+
+        if (isInstructor) {
+            if (type === 'upvote' && !unvote) {
+                await db.sortedSetAdd(`uid:${uid}:instructor_upvote`, now, pid);
+            } else {
+                await db.sortedSetRemove(`uid:${uid}:instructor_upvote`, pid);
+            }
+        }
+
+        await adjustPostVotes(postData, uid, type, unvote, isInstructor);
 
         await fireVoteHook(postData, uid, type, unvote, voteStatus);
 
@@ -223,7 +234,7 @@ module.exports = function (Posts) {
         });
     }
 
-    async function adjustPostVotes(postData, uid, type, unvote) {
+    async function adjustPostVotes(postData, uid, type, unvote, isInstructor) {
         const notType = (type === 'upvote' ? 'downvote' : 'upvote');
         if (unvote) {
             await db.setRemove(`pid:${postData.pid}:${type}`, uid);
@@ -240,8 +251,19 @@ module.exports = function (Posts) {
         postData.downvotes = downvotes;
         postData.votes = postData.upvotes - postData.downvotes;
         await Posts.updatePostVoteCount(postData);
-    }
 
+        if (isInstructor) {
+            if (type === 'upvote' && !unvote) {
+                await db.setAdd(`pid:${postData.pid}:instructor_upvote`, uid);
+            } else {
+                await db.setRemove(`pid:${postData.pid}:instructor_upvote`, uid);
+            }
+
+            const instructorUpvotes = await db.setCount(`pid:${postData.pid}:instructor_upvote`);
+            postData.instructorUpvotes = instructorUpvotes;
+        }
+    }
+    // todo: do i need to update this part too?
     Posts.updatePostVoteCount = async function (postData) {
         if (!postData || !postData.pid || !postData.tid) {
             return;

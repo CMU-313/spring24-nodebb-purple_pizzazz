@@ -89,7 +89,7 @@
                 <i class="fa fa-chevron-up"></i>
             </a>
 
-            <span component="post/vote-count" data-votes="{posts.votes}">{posts.votes}</span>
+            <span component="post/vote-count" data-votes="{posts.votes}">{posts.votes} ({posts.instructor_upvotes})</span>
 
             <!-- IF !downvote:disabled -->
             <a component="post/downvote" href="#" class="<!-- IF posts.downvoted -->downvoted<!-- ENDIF posts.downvoted -->">
