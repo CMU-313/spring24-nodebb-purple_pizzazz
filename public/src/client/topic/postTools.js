@@ -122,7 +122,7 @@ define('forum/topic/postTools', [
          */
         postContainer.on('click', '[component="post/anonymous"]', function (event) {
             console.assert(event instanceof jQuery.Event, 'Invalid event parameter');
-            return anonymizePost($(this));
+            return anonymizePost($(this), getData($(this), 'data-pid'));
         });
 
         postContainer.on('click', '[component="post/upvote"]', function () {
@@ -361,20 +361,41 @@ define('forum/topic/postTools', [
     }
 
     // Used ChatGPT to help write code and type annotations
-    function anonymizePost(button) {
+    // Initialize a variable to store the original username link as an HTML string
+    var originalUsernameLink;
+
+    // Wait for the document to be ready before storing the link
+    $(document).ready(function() {
+        originalUsernameLink = $('[itemprop="author"]').prop('outerHTML');
+    });
+
+    function anonymizePost(button, pid) {
+        console.log(originalUsernameLink);
         // Find the text span element within the clicked button
         var textSpan = button.find('.anonymous-text');
         console.assert(textSpan instanceof jQuery, 'Invalid textSpan type');
 
+        // Extract the existing username and data-uid
+        const usernameRegex = /data-username="([^"]+)"/;
+        const uidRegex = /data-uid="([^"]+)"/;
+        const usernameMatch = originalUsernameLink.match(usernameRegex);
+        const uidMatch = originalUsernameLink.match(uidRegex);
+        const existingUsername = usernameMatch ? usernameMatch[1] : '';
+        const existingUid = uidMatch ? uidMatch[1] : '';
+
+        // Create the modified string
+        const modifiedUsernameLink = `<a itemprop="author" data-username=${existingUsername} data-uid="${existingUid}">Anonymous</a>`;
+
+        console.log(modifiedUsernameLink);
+
         // Toggle the text
         if (textSpan.text() === 'Anonymize') {
             textSpan.text('Unanonymize');
-            $('[itemprop="author"]').text('Anonymous');
+            $('[itemprop="author"]').replaceWith(modifiedUsernameLink); // Replace the link with plain text
         } else {
             textSpan.text('Anonymize');
-            var actualUsername = $('[itemprop="author"]').data('username');
-            console.assert(typeof actualUsername === 'string', 'Invalid actualUsername type');
-            $('[itemprop="author"]').text(actualUsername);
+            // Restore the original username link
+            $('[itemprop="author"]').replaceWith(originalUsernameLink);
         }
 
         // Find the icons within the clicked button
@@ -385,12 +406,12 @@ define('forum/topic/postTools', [
         // Toggle the visibility of the icons
         iconOff.toggleClass('hidden');
         iconOn.toggleClass('hidden');
-        return false;
+        return false
     }
 
     function bookmarkPost(button, pid) {
         const method = button.attr('data-bookmarked') === 'false' ? 'put' : 'del';
-
+        console.log("bookmark method = " + method);
         api[method](`/posts/${pid}/bookmark`, undefined, function (err) {
             if (err) {
                 return alerts.error(err);
@@ -398,6 +419,7 @@ define('forum/topic/postTools', [
             const type = method === 'put' ? 'bookmark' : 'unbookmark';
             hooks.fire(`action:post.${type}`, { pid: pid });
         });
+
         return false;
     }
 
