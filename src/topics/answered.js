@@ -8,6 +8,6 @@ module.exports = function (Topics) {
         // const thisUser = user.getUserFields(uid, ['username', 'userslug']),
         // const cid = await Topics.getTopicField(tid, 'cid');
         // 1 means it has been answered, 0 means not answered
-        Topics.setTopicField(tid, 'answered', 1);
+        await Topics.setTopicField(tid, 'answered', 1);
     };
 };

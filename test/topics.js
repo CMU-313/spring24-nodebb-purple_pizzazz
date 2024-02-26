@@ -1756,53 +1756,44 @@ describe('Topic\'s', () => {
         });
 
         it('should fail with invalid user id equal to 0', (done) => {
-            socketTopics.markAsAnsweredForAll({ uid: 0 }, [tid], (err) => {
+            socketTopics.markAsAnsweredForAll({ uid: 0 }, tid, (err) => {
                 assert.equal(err.message, '[[error:no-privileges]]');
                 done();
             });
         });
         it('should fail if user is not admin nor an instructor', (done) => {
-            socketTopics.markAsAnsweredForAll({ uid: uid }, [tid], (err) => {
+            socketTopics.markAsAnsweredForAll({ uid: uid }, tid, (err) => {
                 assert.equal(err.message, '[[error:no-privileges]]');
                 done();
             });
         });
 
         it('should fail if topic does not exist', (done) => {
-            socketTopics.markAsAnsweredForAll({ uid: uid }, [12312313], (err) => {
-                assert.equal(err.message, '[[error:no-topic]]');
+            socketTopics.markAsAnsweredForAll({ uid: uid }, 12312313, (err) => {
+                assert.equal(err.message, '[[error:invalid-tid]]');
                 done();
             });
         });
+
         it('should succeed if user is admin', async () => {
-            console.log("tid = " + tid.toString());
-            socketTopics.markAsAnsweredForAll({ uid: adminUid }, [tid], (err) => {
+            await socketTopics.markAsAnsweredForAll({ uid: adminUid }, tid, (err) => {
                 assert.ifError(err);
                 assert.equal(err, null);
-                // const didAnswer = await topics.getTopicField(tid, 'answered');
-                // assert.equal(didAnswer,1);
-                // done();
             });
-            console.log("2tid = " + tid.toString());
+            // sleep below for time to write to database
+            await sleep(2500);
             const didAnswer = await topics.getTopicField(tid, 'answered');
-            console.log("admindidAnswer = " + didAnswer.toString());
-            console.log("3tid = " + tid.toString());
-            // assert.equal(didAnswer, 1);
+            assert.equal(didAnswer, 1);
         });
 
         it('should succeed if user is an instructor', async () => {
-            console.log("instructtid = " + tid.toString());
-            socketTopics.markAsAnsweredForAll({ uid: testInstructorUid }, [tid], (err) => {
+            socketTopics.markAsAnsweredForAll({ uid: testInstructorUid }, tid, (err) => {
                 assert.ifError(err);
                 assert.equal(err, null);
-                // const didAnswer = await topics.getTopicField(tid, 'answered');
-                // assert.equal(didAnswer, 1);
-                // done();
             });
-            console.log("instruct2tid = " + tid.toString());
+            // sleep below for time to write to database
+            await sleep(2500);
             const didAnswer = await topics.getTopicField(tid, 'answered');
-            console.log("didAnswer = " + didAnswer.toString());
-            console.log("instruct3tid = " + tid.toString());
             assert.equal(didAnswer, 1);
         });
     });

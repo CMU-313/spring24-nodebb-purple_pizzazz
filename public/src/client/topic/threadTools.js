@@ -103,7 +103,7 @@ define('forum/topic/threadTools', [
         // where the change to the database will take place
         topicContainer.on('click', '[component="topic/mark-answered-for-all"]', function () {
             const btn = $(this);
-            socket.emit('topics.markAsAnsweredForAll', [tid], function (err) {
+            socket.emit('topics.markAsAnsweredForAll', tid, function (err) {
                 if (err) {
                     return alerts.error(err);
                 }
