@@ -98,18 +98,6 @@ define('forum/topic/threadTools', [
             return false;
         });
 
-        topicContainer.on('click', '[component="topic/mark-answered-for-all"]', function () {
-            const btn = $(this);
-            socket.emit('topics.markAsAnsweredForAll', [tid], function (err) {
-                if (err) {
-                    return alerts.error(err);
-                }
-                alerts.success('[[topic:markAsAnsweredForAll.success]]');
-                btn.parents('.thread-tools.open').find('.dropdown-toggle').trigger('click');
-            });
-            return false;
-        });
-
         topicContainer.on('click', '[component="topic/move"]', function () {
             require(['forum/topic/move'], function (move) {
                 move.init([tid], ajaxify.data.cid);
