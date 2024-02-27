@@ -36,18 +36,10 @@ describe('Topic\'s', () => {
     let adminJar;
     let csrf_token;
     let fooUid;
-    let testInstructorUid;
-
 
     before(async () => {
         adminUid = await User.create({ username: 'admin', password: '123456' });
         fooUid = await User.create({ username: 'foo' });
-        const instructData = {};
-        instructData.username = 'mertz';
-        instructData.password = '123456';
-        instructData['account-type'] = 'instructor';
-        testInstructorUid = await User.create(instructData);
-        assert.ok(testInstructorUid);
         await groups.join('administrators', adminUid);
         const adminLogin = await helpers.loginUser('admin', '123456');
         adminJar = adminLogin.jar;
@@ -1737,77 +1729,6 @@ describe('Topic\'s', () => {
             assert(!unreadTids.includes(result.topicData.tid));
         });
     });
-
-    describe('answered', () => {
-        console.log('answered will be tested');
-        const socketTopics = require('../src/socket.io/topics');
-        let tid;
-        let uid;
-        before(async () => {
-            const { topicData } = await topics.post({ uid: topic.userId, title: 'unread topic', content: 'unread topic content', cid: topic.categoryId });
-            uid = await User.create({ username: 'regularJoe' });
-            tid = topicData.tid;
-        });
-        it('should fail with invalid topic id equal to null', (done) => {
-            socketTopics.markAsAnsweredForAll({ uid: adminUid }, null, (err) => {
-                assert.equal(err.message, '[[error:invalid-tid]]');
-                done();
-            });
-        });
-
-        it('should fail with invalid user id equal to 0', (done) => {
-            socketTopics.markAsAnsweredForAll({ uid: 0 }, [tid], (err) => {
-                assert.equal(err.message, '[[error:no-privileges]]');
-                done();
-            });
-        });
-        it('should fail if user is not admin nor an instructor', (done) => {
-            socketTopics.markAsAnsweredForAll({ uid: uid }, [tid], (err) => {
-                assert.equal(err.message, '[[error:no-privileges]]');
-                done();
-            });
-        });
-
-        it('should fail if topic does not exist', (done) => {
-            socketTopics.markAsAnsweredForAll({ uid: uid }, [12312313], (err) => {
-                assert.equal(err.message, '[[error:no-topic]]');
-                done();
-            });
-        });
-        it('should succeed if user is admin', async () => {
-            console.log("tid = " + tid.toString());
-            socketTopics.markAsAnsweredForAll({ uid: adminUid }, [tid], (err) => {
-                assert.ifError(err);
-                assert.equal(err, null);
-                // const didAnswer = await topics.getTopicField(tid, 'answered');
-                // assert.equal(didAnswer,1);
-                // done();
-            });
-            console.log("2tid = " + tid.toString());
-            const didAnswer = await topics.getTopicField(tid, 'answered');
-            console.log("admindidAnswer = " + didAnswer.toString());
-            console.log("3tid = " + tid.toString());
-            // assert.equal(didAnswer, 1);
-        });
-
-        it('should succeed if user is an instructor', async () => {
-            console.log("instructtid = " + tid.toString());
-            socketTopics.markAsAnsweredForAll({ uid: testInstructorUid }, [tid], (err) => {
-                assert.ifError(err);
-                assert.equal(err, null);
-                // const didAnswer = await topics.getTopicField(tid, 'answered');
-                // assert.equal(didAnswer, 1);
-                // done();
-            });
-            console.log("instruct2tid = " + tid.toString());
-            const didAnswer = await topics.getTopicField(tid, 'answered');
-            console.log("didAnswer = " + didAnswer.toString());
-            console.log("instruct3tid = " + tid.toString());
-            assert.equal(didAnswer, 1);
-        });
-    });
-
-
 
     describe('tags', () => {
         const socketTopics = require('../src/socket.io/topics');

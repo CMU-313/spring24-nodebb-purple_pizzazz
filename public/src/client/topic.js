@@ -56,6 +56,7 @@ define('forum/topic', [
         if (!config.usePagination) {
             infinitescroll.init($('[component="topic"]'), posts.loadMorePosts);
         }
+
         addBlockQuoteHandler();
         addParentHandler();
         addDropupHandler();

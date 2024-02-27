@@ -98,9 +98,6 @@ define('forum/topic/threadTools', [
             return false;
         });
 
-        // When markAsAnsweredForAll button is pressed, this routine is called
-        // on the client side and emits to the server side via socket.io
-        // where the change to the database will take place
         topicContainer.on('click', '[component="topic/mark-answered-for-all"]', function () {
             const btn = $(this);
             socket.emit('topics.markAsAnsweredForAll', [tid], function (err) {
