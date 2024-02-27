@@ -72,7 +72,6 @@
 	"login_to_subscribe": "Please register or log in in order to subscribe to this topic.",
 
 	"markAsUnreadForAll.success" : "Topic marked as unread for all.",
-	"markAsAnsweredForAll.success" : "Mark question as answered for all.",
 	"mark_unread": "Mark unread",
 	"mark_unread.success": "Topic marked as unread.",
 
@@ -90,7 +89,6 @@
 
 	"thread_tools.title": "Topic Tools",
 	"thread_tools.markAsUnreadForAll": "Mark Unread For All",
-	"thread_tools.markAsAnsweredForAll": "Mark Answered For All",
 	"thread_tools.pin": "Pin Topic",
 	"thread_tools.unpin": "Unpin Topic",
 	"thread_tools.lock": "Lock Topic",
