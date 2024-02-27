@@ -9,7 +9,7 @@
 <li><a component="topic/move-posts" href="#"><i class="fa fa-fw fa-arrows"></i> [[topic:thread_tools.move-posts]]</a></li>
 {{{ end }}}
 <li><a component="topic/mark-unread-for-all" href="#"><i class="fa fa-fw fa-inbox"></i> [[topic:thread_tools.markAsUnreadForAll]]</a></li>
-<li><a component="topic/mark-answered-for-all" href="#"><i class="fa fa-fw fa-thumbs-up"></i> [[topic:thread_tools.markAsAnsweredForAll]]</a></li>
+<li><a component="topic/mark-answered-for-all" href="#"><i class="fa fa-fw fa-inbox"></i> [[topic:thread_tools.markAsAnsweredForAll]]</a></li>
 <li class="divider"></li>
 <!-- ENDIF privileges.editable -->
 

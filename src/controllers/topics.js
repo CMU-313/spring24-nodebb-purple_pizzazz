@@ -120,13 +120,6 @@ topicsController.get = async function getTopic(req, res, next) {
         res.locals.linkTags.push(rel);
     });
 
-    // Wish to put boolean data items for if the user is an instructor
-    // and for if the category is Question&Answer in to the topicData
-    // for use by the template file
-    const thisAcctType = await user.getUserField(req.uid, 'accounttype');
-    topicData.isInstructor = (thisAcctType === 'instructor');
-    // topicData.isQandA = (topicData.category.cid === 2);
-    topicData.isQandA = true;
     res.render('topic', topicData);
 };
 
