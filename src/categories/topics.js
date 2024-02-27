@@ -1,4 +1,5 @@
 'use strict';
+//TODO(William): Convert file to Typescript
 
 const db = require('../database');
 const topics = require('../topics');
@@ -91,9 +92,10 @@ module.exports = function (Categories) {
         return data.category.topic_count;
     };
 
-    Categories.buildTopicsSortedSet = async function (data) {
+    //TODO(William): Annotate function.
+    Categories.buildTopicsSortedSet = async function (data) { //any -> str | Array[str], any
         const { cid } = data;
-        let set = `cid:${cid}:tids`;
+        let set = `cid:${cid}:tids`; //set: string
         const sort = data.sort || (data.settings && data.settings.categoryTopicSort) || meta.config.categoryTopicSort || 'newest_to_oldest';
 
         if (sort === 'most_posts') {
@@ -102,7 +104,12 @@ module.exports = function (Categories) {
             set = `cid:${cid}:tids:votes`;
         } else if (sort === 'most_views') {
             set = `cid:${cid}:tids:views`;
+        } else if (sort === 'answered') {
+            set = `cid:${cid}:tids:answered`;
         }
+
+        console.log("penguib\n");
+        console.log(`1. ${sort} -> ${set}\n`);
 
         if (data.tag) {
             if (Array.isArray(data.tag)) {
@@ -116,10 +123,15 @@ module.exports = function (Categories) {
             set = (Array.isArray(set) ? set : [set]).concat([`cid:${cid}:uid:${data.targetUid}:tids`]);
         }
 
+        console.log(`2. ${sort} -> ${set}\n`);
+
         const result = await plugins.hooks.fire('filter:categories.buildTopicsSortedSet', {
             set: set,
             data: data,
         });
+        //console.log(`Res: ${result}`);
+
+
         return result && result.set;
     };
 
