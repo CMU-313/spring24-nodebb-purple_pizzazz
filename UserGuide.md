@@ -1,5 +1,6 @@
-Add Answered
--------------------------------------------------
+
+Add Answered Feature
+------------------------------------------------
 
 Using the new "mark as answered" feature differs depending on your status in the website.
 
@@ -62,4 +63,21 @@ Anyone who logs in as an instructor on the website is marked as such, and will t
 
 I believe that these tests are sufficient because they cover all possible inputs that could be given to the markAsAnsweredForAll and isInstructor function. 
 
+
+=======
+
+<-- To be determined at a later time. -->
+
+# Getting started
+
+# New Features
+
+# Testing
+
+## User tests
+
+## Automated tests
+
+
+-- Team Purple_Pizzazz
 
