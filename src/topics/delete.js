@@ -118,6 +118,7 @@ module.exports = function (Topics) {
                 `cid:${topicData.cid}:tids:lastposttime`,
                 `cid:${topicData.cid}:tids:votes`,
                 `cid:${topicData.cid}:tids:views`,
+                `cid:${topicData.cid}:tids:answered`,
                 `cid:${topicData.cid}:recent_tids`,
                 `cid:${topicData.cid}:uid:${topicData.uid}:tids`,
                 `uid:${topicData.uid}:topics`,

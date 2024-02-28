@@ -81,6 +81,7 @@ module.exports = function (Topics) {
         });
     }
 
+    //TODO(William): Annotate
     async function getCidTids(params) {
         if (params.tags.length) {
             return _.intersection(...await Promise.all(params.tags.map(async (tag) => {
@@ -112,13 +113,14 @@ module.exports = function (Topics) {
         if (params.term === 'alltime' && !params.cids && !params.tags.length && params.filter !== 'watched' && !params.floatPinned) {
             return tids;
         }
-        const topicData = await Topics.getTopicsFields(tids, ['tid', 'lastposttime', 'upvotes', 'downvotes', 'postcount', 'pinned']);
+        const topicData = await Topics.getTopicsFields(tids, ['tid', 'lastposttime', 'upvotes', 'downvotes', 'postcount', 'pinned', 'answered']);
         const sortMap = {
             recent: sortRecent,
             old: sortOld,
             posts: sortPopular,
             votes: sortVotes,
             views: sortViews,
+            answered: sortAnswered,
         };
         const sortFn = sortMap[params.sort] || sortRecent;
 
@@ -159,6 +161,11 @@ module.exports = function (Topics) {
 
     function sortViews(a, b) {
         return b.viewcount - a.viewcount;
+    }
+
+    //TODO(William): Annotate
+    function sortAnswered(a, b) {
+        return b.answered - a.answered;
     }
 
     async function filterTids(tids, params) {
