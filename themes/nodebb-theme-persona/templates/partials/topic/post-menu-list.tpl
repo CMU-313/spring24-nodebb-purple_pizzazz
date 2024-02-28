@@ -83,7 +83,8 @@
             <span component="post/bookmark-count" class="bookmarkCount badge" data-bookmarks="{posts.bookmarks}">{posts.bookmarks}</span>&nbsp;
         </a>
     </li>
-
+    {{{ end }}}
+<!-- IF posts.display_moderator_tools -->
     <li>
         <a component="post/anonymous" role="menuitem" tabindex="-1" href="#" data-anonymized="{posts.anonymized}">
             <span class="menu-icon">
@@ -93,7 +94,7 @@
             <span class="anonymous-text">[[topic:Anonymize]]</span>
         </a>
     </li>
-    {{{ end }}}
+<!-- END -->
 
     <li>
         <a role="menuitem" tabindex="-1" href="#" data-clipboard-text="{posts.absolute_url}">
