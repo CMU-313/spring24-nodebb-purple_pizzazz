@@ -256,6 +256,14 @@ describe('User', () => {
                 done();
             });
         });
+
+        it('should return false', (done) => {
+            User.isInstructor(null, (err, isInstructor) => {
+                assert.equal(err, null);
+                assert.equal(isInstructor, false);
+                done();
+            });
+        });
     });
 
     describe('.getModeratorUids()', () => {

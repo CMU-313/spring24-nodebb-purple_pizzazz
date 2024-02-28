@@ -20,6 +20,9 @@ privsUsers.isGlobalModerator = async function (uid) {
 };
 
 privsUsers.isInstructor = async function (uid) {
+    if (uid === null) {
+        return false;
+    }
     const thisAcctType = await user.getUserField(uid, 'accounttype');
     return (thisAcctType === 'instructor');
 };
