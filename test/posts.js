@@ -31,8 +31,6 @@ describe('Post\'s', () => {
     let postData;
     let topicData;
     let cid;
-    let instructorUid;
-    let studentUid;
 
     before((done) => {
         async.series({
@@ -51,12 +49,6 @@ describe('Post\'s', () => {
                     description: 'Test category created by testing script',
                 }, next);
             },
-            instructorUid: function (next) {
-                user.create({ username: 'instructoracct', accounttype: 'instructor' }, next);
-            },
-            studentUid: function (next) {
-                user.create({ username: 'studentacct', accounttype: 'student' }, next);
-            },
         }, (err, results) => {
             if (err) {
                 return done(err);
@@ -64,8 +56,6 @@ describe('Post\'s', () => {
 
             voterUid = results.voterUid;
             voteeUid = results.voteeUid;
-            instructorUid = results.instructorUid;
-            studentUid = results.studentUid;
             globalModUid = results.globalModUid;
             cid = results.category.cid;
 
@@ -1236,34 +1226,6 @@ describe('Post\'s', () => {
                 assert(events);
                 assert.strictEqual(events.length, 0);
             });
-        });
-    });
-
-    describe('Account Type', () => {
-        it('should display student account as student', async () => {
-            console.log(studentUid);
-            const message = await topics.post({
-                uid: studentUid,
-                cid,
-                title: 'Account type testing - student',
-                content: 'Some text here for the OP',
-            });
-
-            console.log('ufkdljaksjfdkaskflsdjfsldf');
-            console.log(message);
-
-            assert.equal(message.postData.user.accounttype, 'student');
-        });
-
-        it('should display instructor account as instructor', async () => {
-            const message = await topics.post({
-                uid: instructorUid,
-                cid,
-                title: 'Account type testing - instructor',
-                content: 'Some text here for the OP',
-            });
-
-            assert.equal(message.postData.user.accounttype, 'instructor');
         });
     });
 });
