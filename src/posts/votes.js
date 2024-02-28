@@ -194,9 +194,9 @@ module.exports = function (Posts) {
 
         if (isInstructor) {
             if (type === 'upvote' && !unvote) {
-                await db.sortedSetAdd(`uid:${uid}:instructor_upvote`, now, pid);
+                await db.sortedSetAdd(`uid:${uid}:instructorUpvote`, now, pid);
             } else {
-                await db.sortedSetRemove(`uid:${uid}:instructor_upvote`, pid);
+                await db.sortedSetRemove(`uid:${uid}:instructorUpvote`, pid);
             }
         }
 
@@ -254,16 +254,16 @@ module.exports = function (Posts) {
 
         if (isInstructor) {
             if (type === 'upvote' && !unvote) {
-                await db.setAdd(`pid:${postData.pid}:instructor_upvote`, uid);
+                await db.setAdd(`pid:${postData.pid}:instructorUpvote`, uid);
             } else {
-                await db.setRemove(`pid:${postData.pid}:instructor_upvote`, uid);
+                await db.setRemove(`pid:${postData.pid}:instructorUpvote`, uid);
             }
 
-            const instructorUpvotes = await db.setCount(`pid:${postData.pid}:instructor_upvote`);
+            const instructorUpvotes = await db.setCount(`pid:${postData.pid}:instructorUpvote`);
             postData.instructorUpvotes = instructorUpvotes;
         }
     }
-    // todo: do i need to update this part too?
+
     Posts.updatePostVoteCount = async function (postData) {
         if (!postData || !postData.pid || !postData.tid) {
             return;
@@ -278,9 +278,11 @@ module.exports = function (Posts) {
         await Promise.all([
             updateTopicVoteCount(postData),
             db.sortedSetAdd('posts:votes', postData.votes, postData.pid),
+            db.sortedSetAdd('posts:instructorUpvotes', postData.instructorUpvotes, postData.pid),
             Posts.setPostFields(postData.pid, {
                 upvotes: postData.upvotes,
                 downvotes: postData.downvotes,
+                instructorUpvotes: postData.instructorUpvotes,
             }),
         ]);
         plugins.hooks.fire('action:post.updatePostVoteCount', { post: postData });

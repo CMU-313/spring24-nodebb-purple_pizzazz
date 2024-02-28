@@ -533,6 +533,8 @@ describe('API', async () => {
             return;
         }
 
+        console.log(required);
+
         // Compare the schema to the response
         required.forEach((prop) => {
             if (schema.hasOwnProperty(prop)) {

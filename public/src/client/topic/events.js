@@ -75,6 +75,10 @@ define('forum/topic/events', [
         });
         const reputationElements = $('.reputation[data-uid="' + data.post.uid + '"]');
         votes.html(data.post.votes).attr('data-votes', data.post.votes);
+        const instructorUpvotes = $('[data-pid="' + data.post.pid + '"] [component="post/instructor-upvote-count"]').filter(function (index, el) {
+            return parseInt($(el).closest('[data-pid]').attr('data-pid'), 10) === parseInt(data.post.pid, 10);
+        });
+        instructorUpvotes.html(data.post.instructorUpvotes).attr('data-instructor-upvotes', data.post.instructorUpvotes);
         reputationElements.html(data.user.reputation).attr('data-reputation', data.user.reputation);
     }
 

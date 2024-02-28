@@ -233,6 +233,7 @@ module.exports = function (Topics) {
         posts.overrideGuestHandle(postData, data.handle);
 
         postData.votes = 0;
+        postData.instructorUpvotes = 0;
         postData.bookmarked = false;
         postData.display_edit_tools = true;
         postData.display_delete_tools = true;

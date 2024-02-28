@@ -12,7 +12,7 @@ module.exports = function (module) {
             return await sortedSetAddMulti(key, score, value);
         }
         if (!utils.isNumber(score)) {
-            throw new Error(`[[error:invalid-score, ${score}]]`);
+            throw new Error(`[[error:invalid-score-1, ${key}, ${score}, ${value}]]`);
         }
         await module.client.zadd(key, score, String(value));
     };

@@ -27,3 +27,27 @@ module.exports = {
         }, callback);
     },
 };
+
+module.exports = {
+    name: 'New sorted set posts:instructorUpvotes',
+    timestamp: Date.UTC(2017, 1, 27),
+    method: function (callback) {
+        const { progress } = this;
+
+        require('../../batch').processSortedSet('posts:pid', (pids, next) => {
+            async.each(pids, (pid, next) => {
+                db.getObjectFields(`post:${pid}`, ['instructorUpvotes'], (err, postData) => {
+                    if (err || !postData) {
+                        return next(err);
+                    }
+
+                    progress.incr();
+                    const instructorUpvotes = parseInt(postData.instructorUpvotes || 0, 10);
+                    db.sortedSetAdd('posts:instructorUpvotes', instructorUpvotes, pid, next);
+                });
+            }, next);
+        }, {
+            progress: this.progress,
+        }, callback);
+    },
+};
