@@ -961,9 +961,10 @@ describe('Post\'s', () => {
             done();
         });
     });
-    /* Attempted to write test cases for the anonymizing button. However, the functional code relies on event inputs.
+        /* Attempted to write test cases for the anonymizing button. However, the functional code relies on event inputs.
      As a result, I was unable to really write test cases that actively test the functionality of the button.
-     If the backend was successfully implemented, I could have tested how the variables designed to */
+     If the backend was successfully implemented, I could have tested how the boolean variable corresponding to
+     whether a post is anonymized or not get changed based on certain actions. */
 
     // describe('toggleAnonymous', () => {
     //     const textSpan = button.find('.anonymous-text');
@@ -980,52 +981,55 @@ describe('Post\'s', () => {
     //     });
     // });
 
-    // describe('toggleAnonymous', () => {
-    //     let postContainer;
-    //     let originalUsernameLink;
-    //     const $ = require('jquery');
-    //     const { anonymizePost } = require('../public/src/client/topic/postTools');
+    /* The following test was written with help from ChatGPT but it doesn't pass because of
+    "ReferenceError: define is not defined"
 
-    //     beforeEach(() => {
-    //         // Set up your test environment
-    //         // For example, create a dummy post container and store the original username link
-    //         postContainer = $('<div id="postContainer"></div>');
-    //         originalUsernameLink = $('<a href="#" itemprop="author">Original Username</a>').prop('outerHTML');
-    //         $('body').append(postContainer); // Add the post container to the DOM
-    //         postContainer.on('click', '[component="post/anonymous"]', function (event) {
-    //             anonymizePost($(this)); // Call the anonymizePost function when the event is triggered
-    //         });
-    //     });
+    describe('toggleAnonymous', () => {
+        let postContainer;
+        let originalUsernameLink;
+        const $ = require('jquery');
+        const { anonymizePost } = require('../public/src/client/topic/postTools');
 
-    //     afterEach(() => {
-    //         // Clean up after each test
-    //         postContainer.remove(); // Remove the post container from the DOM
-    //     });
+        beforeEach(() => {
+            // Set up your test environment
+            // For example, create a dummy post container and store the original username link
+            postContainer = $('<div id="postContainer"></div>');
+            originalUsernameLink = $('<a href="#" itemprop="author">Original Username</a>').prop('outerHTML');
+            $('body').append(postContainer); // Add the post container to the DOM
+            postContainer.on('click', '[component="post/anonymous"]', function (event) {
+                anonymizePost($(this)); // Call the anonymizePost function when the event is triggered
+            });
+        });
 
-    //     it('should anonymize post when anonymize button is clicked', () => {
-    //         // Simulate a click event on the anonymize button
-    //         const anonymizeButton = $('<button component="post/anonymous"></button>');
-    //         postContainer.append(anonymizeButton); // Add the button to the post container
+        afterEach(() => {
+            // Clean up after each test
+            postContainer.remove(); // Remove the post container from the DOM
+        });
 
-    //         // Trigger a click event on the anonymize button
-    //         anonymizeButton.trigger('click');
+        it('should anonymize post when anonymize button is clicked', () => {
+            // Simulate a click event on the anonymize button
+            const anonymizeButton = $('<button component="post/anonymous"></button>');
+            postContainer.append(anonymizeButton); // Add the button to the post container
 
-    //         // Check if the post is anonymized
-    //         assert(postContainer.find('[itemprop="author"]').text() !== originalUsernameLink, 'Post should be anonymized');
-    //     });
+            // Trigger a click event on the anonymize button
+            anonymizeButton.trigger('click');
 
-    //     it('should unanonymize post when unanonymize button is clicked', () => {
-    //         // Simulate a click event on the unanonymize button
-    //         const unanonymizeButton = $('<button component="post/anonymous"></button>');
-    //         postContainer.append(unanonymizeButton); // Add the button to the post container
+            // Check if the post is anonymized
+            assert(postContainer.find('[itemprop="author"]').text()!==originalUsernameLink,'Not anonymous');
+        });
 
-    //         // Trigger a click event on the unanonymize button
-    //         unanonymizeButton.trigger('click');
+        it('should unanonymize post when unanonymize button is clicked', () => {
+            // Simulate a click event on the unanonymize button
+            const unanonymizeButton = $('<button component="post/anonymous"></button>');
+            postContainer.append(unanonymizeButton); // Add the button to the post container
 
-    //         // Check if the post is unanonymized
-    //         assert(postContainer.find('[itemprop="author"]').text() === originalUsernameLink, 'Post should be unanonymized');
-    //     });
-    // });
+            // Trigger a click event on the unanonymize button
+            unanonymizeButton.trigger('click');
+
+            // Check if the post is unanonymized
+            assert(postContainer.find('[itemprop="author"]').text() === originalUsernameLink, 'unanonymized');
+        });
+    }); */
 
     describe('post queue', () => {
         let uid;
