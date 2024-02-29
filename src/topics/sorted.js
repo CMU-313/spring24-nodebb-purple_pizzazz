@@ -126,8 +126,8 @@ module.exports = function (Topics) {
             answered: sortAnswered,
         };
 
-        //sortFn: fn
-        const sortFn = sortMap[params.sort] || sortRecent; 
+        // sortFn: fn
+        const sortFn = sortMap[params.sort] || sortRecent;
 
         if (params.floatPinned) {
             floatPinned(topicData, sortFn);
@@ -135,7 +135,7 @@ module.exports = function (Topics) {
             topicData.sort(sortFn);
         }
 
-        //returns null | number
+        // returns null | number
         return topicData.map(topic => topic && topic.tid);
     }
 
@@ -169,7 +169,7 @@ module.exports = function (Topics) {
         return b.viewcount - a.viewcount;
     }
 
-    //I don't belive this functionality is used during the active search option.
+    // I don't belive this functionality is used during the active search option.
     function sortAnswered(a, b) { // any, any -> number
         return b.answered - a.answered;
     }

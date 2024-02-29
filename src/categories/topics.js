@@ -123,7 +123,7 @@ module.exports = function (Categories) {
         const result = await plugins.hooks.fire('filter:categories.buildTopicsSortedSet', {
             set: set,
             data: data,
-        }); //result: any | null
+        }); // result: any | null
 
         return result && result.set;
     };
