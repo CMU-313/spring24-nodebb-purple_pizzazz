@@ -371,7 +371,7 @@ define('forum/topic/postTools', [
         const existingUid = uidMatch ? uidMatch[1] : '';
 
         // Create the modified string
-        const modifiedUsernameLink = `<a itemprop="author" data-username=${existingUsername} data-uid="${existingUid}">Anonymous</a>`;
+        const modifiedUsernameLink = `<a itemprop="author" data-username=${existingUsername} data-uid="${existingUid}">Anonymous</a> <small class="label group-label inline-block" style="background-color: lightblue;">{posts.user.accounttype}</small>`;
         return modifiedUsernameLink;
     }
 
