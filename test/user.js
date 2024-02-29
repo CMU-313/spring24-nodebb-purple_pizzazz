@@ -30,6 +30,7 @@ describe('User', () => {
     let userData;
     let testUid;
     let testCid;
+    let testInstructorUid;
 
     const plugins = require('../src/plugins');
 
@@ -79,12 +80,20 @@ describe('User', () => {
 
             await User.setUserField(testUid, 'email', userData.email);
             await User.email.confirmByUid(testUid);
+            const instructData = {};
+            instructData.username = 'mertz';
+            instructData.password = '123456';
+            instructData['account-type'] = 'instructor';
+            testInstructorUid = await User.create(instructData);
+            assert.ok(testInstructorUid);
         });
 
         it('should be created properly', async () => {
             const email = '<h1>test</h1>@gmail.com';
             const uid = await User.create({ username: 'weirdemail', email: email });
             const data = await User.getUserData(uid);
+
+            assert(typeof data === 'object');
 
             const validationPending = await User.email.isValidationPending(uid, email);
             assert.strictEqual(validationPending, true);
@@ -228,6 +237,32 @@ describe('User', () => {
                 assert.equal(err, null);
                 assert.equal(isModerator[0], false);
                 assert.equal(isModerator[1], false);
+                done();
+            });
+        });
+    });
+
+    describe('.isInstructor()', () => {
+        it('should return false', (done) => {
+            User.isInstructor(testUid, (err, isInstructor) => {
+                assert.equal(err, null);
+                assert.equal(isInstructor, false);
+                done();
+            });
+        });
+
+        it('should return true', (done) => {
+            User.isInstructor(testInstructorUid, (err, isInstructor) => {
+                assert.equal(err, null);
+                assert.equal(isInstructor, true);
+                done();
+            });
+        });
+
+        it('should return false', (done) => {
+            User.isInstructor(null, (err, isInstructor) => {
+                assert.equal(err, null);
+                assert.equal(isInstructor, false);
                 done();
             });
         });
