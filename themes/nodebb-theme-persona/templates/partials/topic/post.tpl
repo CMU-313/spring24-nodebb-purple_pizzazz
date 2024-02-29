@@ -8,7 +8,7 @@
 
     <small class="pull-left">
         <strong>
-            <a href="<!-- IF posts.user.userslug -->{config.relative_path}/user/{posts.user.userslug}<!-- ELSE -->#<!-- ENDIF posts.user.userslug -->" itemprop="author" data-username="{posts.user.username}" data-uid="{posts.user.uid}">{posts.user.displayname}</a>   
+            <a href="<!-- IF posts.user.userslug -->{config.relative_path}/user/{posts.user.userslug}<!-- ELSE -->#<!-- ENDIF posts.user.userslug -->" itemprop="author" data-username="{posts.user.username}" data-uid="{posts.user.uid}">{posts.user.displayname} <small class="label group-label inline-block" style="background-color: lightblue;">{posts.user.accounttype}</small></a>   
         </strong>
 
         <!-- IMPORT partials/topic/badge.tpl -->
