@@ -359,7 +359,8 @@ define('forum/topic/postTools', [
         }
         return { text: selectedText, pid: selectedPid, username: username };
     }
-
+    // Written using ChatGPT
+    // Creates link that display name as Anonymous without the link to user profile
     function createAnonymousUserLink(originalLink) {
         // Extract the existing username and data-uid
         const usernameRegex = /data-username="([^"]+)"/;
@@ -374,19 +375,20 @@ define('forum/topic/postTools', [
         return modifiedUsernameLink;
     }
 
+    // Initialize a variable to store the original username link as an HTML string
+    var originalUsernameLink;
+
+    // Wait for the document to be ready before storing the link
+    $(document).ready(function () {
+        originalUsernameLink = $('[itemprop="author"]').prop('outerHTML');
+    });
+
     // Used ChatGPT to help write code and type annotations
     function anonymizePost(button, pid) {
         // Find the text span element within the clicked button
         var textSpan = button.find('.anonymous-text');
         console.assert(textSpan instanceof jQuery, 'Invalid textSpan type');
 
-        // Initialize a variable to store the original username link as an HTML string
-        var originalUsernameLink;
-
-        // Wait for the document to be ready before storing the link
-        $(document).ready(function() {
-            originalUsernameLink = $('[itemprop="author"]').prop('outerHTML');
-        });
         const modifiedUsernameLink = createAnonymousUserLink(originalUsernameLink);
 
         // Toggle the text
@@ -394,26 +396,22 @@ define('forum/topic/postTools', [
             textSpan.text('Unanonymize');
             $('[itemprop="author"]').replaceWith(modifiedUsernameLink); // Replace the link with plain text
             socket.emit('posts.makeAnonymous', pid, function (err) {
-                console.log("sockets emit anonymous");
+                console.log('sockets emit anonymous');
                 if (err) {
                     return alerts.error(err);
-                 }
-             }
-           )
-
+                }
+            });
         } else {
             textSpan.text('Anonymize');
             // Restore the original username link
             $('[itemprop="author"]').replaceWith(originalUsernameLink);
             socket.emit('posts.makeUnanonymous', pid, function (err) {
-                console.log("sockets emit unanonymous");
+                console.log('sockets emit unanonymous');
                 if (err) {
                     return alerts.error(err);
-                 }
-             }
-           )
+                }
+            });
         }
-        
         // Find the icons within the clicked utton
         var iconOff = button.find('[component="post/anonymous/off"]');
         var iconOn = button.find('[component="post/anonymous/on"]');
@@ -423,7 +421,7 @@ define('forum/topic/postTools', [
         iconOff.toggleClass('hidden');
         iconOn.toggleClass('hidden');
 
-        return false
+        return false;
     }
 
     function bookmarkPost(button, pid) {
