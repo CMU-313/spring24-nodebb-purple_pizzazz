@@ -81,7 +81,6 @@ module.exports = function (Topics) {
         });
     }
 
-    //TODO(William): Annotate
     async function getCidTids(params) {
         if (params.tags.length) {
             return _.intersection(...await Promise.all(params.tags.map(async (tag) => {
@@ -109,11 +108,15 @@ module.exports = function (Topics) {
         return pinnedTids.concat(tids);
     }
 
-    async function sortTids(tids, params) {
+    async function sortTids(tids, params) { // Array[number], any -> Array[null | number]
         if (params.term === 'alltime' && !params.cids && !params.tags.length && params.filter !== 'watched' && !params.floatPinned) {
             return tids;
         }
+
+        // topicData: any
         const topicData = await Topics.getTopicsFields(tids, ['tid', 'lastposttime', 'upvotes', 'downvotes', 'postcount', 'pinned', 'answered']);
+        
+        // sortMap: Object[fn]
         const sortMap = {
             recent: sortRecent,
             old: sortOld,
@@ -122,7 +125,9 @@ module.exports = function (Topics) {
             views: sortViews,
             answered: sortAnswered,
         };
-        const sortFn = sortMap[params.sort] || sortRecent;
+
+        //sortFn: fn
+        const sortFn = sortMap[params.sort] || sortRecent; 
 
         if (params.floatPinned) {
             floatPinned(topicData, sortFn);
@@ -130,6 +135,7 @@ module.exports = function (Topics) {
             topicData.sort(sortFn);
         }
 
+        //returns null | number
         return topicData.map(topic => topic && topic.tid);
     }
 
@@ -163,8 +169,8 @@ module.exports = function (Topics) {
         return b.viewcount - a.viewcount;
     }
 
-    //TODO(William): Annotate
-    function sortAnswered(a, b) {
+    //I don't belive this functionality is used during the active search option.
+    function sortAnswered(a, b) { // any, any -> number
         return b.answered - a.answered;
     }
 

@@ -108,7 +108,8 @@ module.exports = function (Topics) {
         await db.sortedSetsRemove(followerKeys.concat(ignorerKeys), tid);
     }
 
-    async function deleteTopicFromCategoryAndUser(tid) {
+    async function deleteTopicFromCategoryAndUser(tid) { //returns nothing
+        //an object containing the containing category & user ids
         const topicData = await Topics.getTopicFields(tid, ['cid', 'uid']);
         await Promise.all([
             db.sortedSetsRemove([
