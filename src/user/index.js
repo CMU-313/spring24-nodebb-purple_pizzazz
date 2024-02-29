@@ -140,6 +140,10 @@ User.isModerator = async function (uid, cid) {
     return await privileges.users.isModerator(uid, cid);
 };
 
+User.isInstructor = async function (uid) {
+    return await privileges.users.isInstructor(uid);
+};
+
 User.isModeratorOfAnyCategory = async function (uid) {
     const cids = await User.getModeratedCids(uid);
     return Array.isArray(cids) ? !!cids.length : false;

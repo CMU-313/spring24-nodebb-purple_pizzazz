@@ -14,6 +14,7 @@ const events = require('../events');
 const SocketTopics = module.exports;
 
 require('./topics/unread')(SocketTopics);
+require('./topics/answered')(SocketTopics);
 require('./topics/move')(SocketTopics);
 require('./topics/tools')(SocketTopics);
 require('./topics/infinitescroll')(SocketTopics);
