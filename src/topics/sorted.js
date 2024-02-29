@@ -115,7 +115,7 @@ module.exports = function (Topics) {
 
         // topicData: any
         const topicData = await Topics.getTopicsFields(tids, ['tid', 'lastposttime', 'upvotes', 'downvotes', 'postcount', 'pinned', 'answered']);
-        
+
         // sortMap: Object[fn]
         const sortMap = {
             recent: sortRecent,
