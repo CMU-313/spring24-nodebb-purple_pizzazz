@@ -67,9 +67,9 @@ I believe that these tests are sufficient because they cover all possible inputs
 
 A user has the ability to sort by answeredness. This option is available to all users, including students and guests.
 
-In a category page, clicking the "Sort by" button will show a menu at the bottom of the screen. A new button has been added to this menu, which says "Answered". Clicking this will cause answered topics to fall to the bottom of the category page. 
+In a category page, clicking the "Sort by" button will show a menu at the bottom of the screen. Two new buttons have been added to this menu, which say "Answered" and "Unanswered". Clicking the latter will cause answered topics to fall to the bottom of the category page. The former will cause the answered topics to rise to the top.
 
-Due to the way that answeredness is implemented, topics that were posted before this update will not show up on the page unless answered after the fact.
+Due to the way that answeredness is implemented, topics that were posted before this update will not show up on the page in this sorting mode unless answered after the fact.
 
 ---------------
 
