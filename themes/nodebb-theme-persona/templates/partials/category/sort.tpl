@@ -12,5 +12,6 @@
         <li><a href="#" class="most_votes" data-sort="most_votes"><i class="fa fa-fw"></i> [[topic:most_votes]]</a></li>
         <li><a href="#" class="most_views" data-sort="most_views"><i class="fa fa-fw"></i> [[topic:most_views]]</a></li>
         <li><a href="#" class="answered" data-sort="answered"><i class="fa fa-fw"></i> [[topic:answered]]</a></li>
+        <li><a href="#" class="unanswered" data-sort="unanswered"><i class="fa fa-fw"></i> [[topic:unanswered]]</a></li>
     </ul>
 </div>
