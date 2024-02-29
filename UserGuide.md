@@ -1,5 +1,5 @@
 
-Add Answered Feature
+# Added Answeredness Feature
 ------------------------------------------------
 
 Using the new "mark as answered" feature differs depending on your status in the website.
@@ -63,6 +63,19 @@ Anyone who logs in as an instructor on the website is marked as such, and will t
 
 I believe that these tests are sufficient because they cover all possible inputs that could be given to the markAsAnsweredForAll and isInstructor function. 
 
+# Added feature to sort topics by answeredness
+
+A user has the ability to sort by answeredness. This option is available to all users, including students and guests.
+
+In a category page, clicking the "Sort by" button will show a menu at the bottom of the screen. A new button has been added to this menu, which says "Answered". Clicking this will cause answered topics to fall to the bottom of the category page. 
+
+Due to the way that answeredness is implemented, topics that were posted before this update will not show up on the page unless answered after the fact.
+
+---------------
+
+The changes to the code that facilitated this feature are already well-covered by preexisting automated tests, including those for answeredness as a feature and the database sorting ranges in test/database/sorted.js. 
+
+However, to test that the changes to the database when a topic is marked answered affect the sorting as well, some assertions are added to some answeredness tests in test/topics.js.
 
 =======
 
