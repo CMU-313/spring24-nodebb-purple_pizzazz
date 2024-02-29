@@ -961,7 +961,7 @@ describe('Post\'s', () => {
             done();
         });
     });
-        /* Attempted to write test cases for the anonymizing button. However, the functional code relies on event inputs.
+    /* Attempted to write test cases for the anonymizing button. However,the functional code relies on button inputs.
      As a result, I was unable to really write test cases that actively test the functionality of the button.
      If the backend was successfully implemented, I could have tested how the boolean variable corresponding to
      whether a post is anonymized or not get changed based on certain actions. */
