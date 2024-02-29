@@ -3,6 +3,7 @@
 const async = require('async');
 const validator = require('validator');
 const _ = require('lodash');
+const assert = require('assert');
 
 const db = require('../database');
 const user = require('../user');
@@ -99,12 +100,18 @@ module.exports = function (Posts) {
         return groupsMap;
     }
 
+    // getUserData(uids : Array<number>, uid : number) : Promise<
     async function getUserData(uids, uid) {
+        assert(Array.isArray(uids));
+        if (uids.length !== 0) {
+            assert(typeof uids[0] === 'number');
+        }
+        // assert(typeof uid === 'number');
         const fields = [
             'uid', 'username', 'fullname', 'userslug',
             'reputation', 'postcount', 'topiccount', 'picture',
             'signature', 'banned', 'banned:expire', 'status',
-            'lastonline', 'groupTitle', 'mutedUntil',
+            'lastonline', 'groupTitle', 'mutedUntil', 'accounttype',
         ];
         const result = await plugins.hooks.fire('filter:posts.addUserFields', {
             fields: fields,

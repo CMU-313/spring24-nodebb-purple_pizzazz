@@ -86,6 +86,8 @@ describe('User', () => {
             const uid = await User.create({ username: 'weirdemail', email: email });
             const data = await User.getUserData(uid);
 
+            assert(typeof data === 'object');
+
             const validationPending = await User.email.isValidationPending(uid, email);
             assert.strictEqual(validationPending, true);
 
