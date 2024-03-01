@@ -63,10 +63,35 @@ Anyone who logs in as an instructor on the website is marked as such, and will t
 
 I believe that these tests are sufficient because they cover all possible inputs that could be given to the markAsAnsweredForAll and isInstructor function. 
 
+Anonymizing Posts Feature
+------------------------------------------------
+
+The anonymizing posts feature allows users to toggle between displaying their username or anonymizing their posts. When a user chooses to anonymize their post, their username is replaced with "Anonymous" and the profile link associated with it is removed so that other users can't visit their profile. Posters also have the option of reverting their anonymity if they so desire. The anonymizing posts feature is implemented as a button within the post list dropdown. Users can easily toggle the anonymization of their posts with a simple click.
+
+# Usage: 
+To anonymize your posts:
+1. Navigate to the post you want to anonymize.
+2. Locate the dropdown menu associated with the post.
+3. Click on the "Anonymize" button.
+4. Your username will be replaced with "Anonymous" and the profile link will be removed.
+
+To revert to displaying your username:
+1. Follow the same steps as above.
+2. Click on the "De-anonymize" button.
+
+- Anonymizing your posts will remove any association with your username and profile link.
+- De-anonymizing your posts will revert them to displaying your username and profile link.
+
+Known issues with the anonymization button: 
+- The visual changes made to the post is only available client-side. Other users may not see the anonymization changes.
+- Pressing the button currently causes an error asserting that "posts.makeAnonymous" is not a function.
+- There might be buggy interactions between the toggling anonymous feature and labeling students/instructors feature.
+
+--------
+Files modified include public/src/client/topic/events.js, public/src/client/topic/postTools.js, src/posts/anonymize.js, src/socket.io/posts/anonymize.js, themes/nodebb-theme-persona/templates/partials/topic/post-menu-list.tpl, etc. 
+
 
 =======
-
-<-- To be determined at a later time. -->
 
 # Getting started
 
