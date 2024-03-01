@@ -68,6 +68,15 @@ module.exports = function (SocketPosts) {
 
         return results;
     };
+    SocketPosts.makeAnonymous = async function (socket, pid) {
+        console.log('SocketPosts.makeAnonymous');
+        await posts.makeAnonymous(pid);
+    };
+
+    SocketPosts.makeUnanonymous = async function (socket, pid) {
+        console.log('SocketPosts.makeUnanonymous');
+        await posts.makeUnanonymous(pid);
+    };
 
     SocketPosts.changeOwner = async function (socket, data) {
         if (!data || !Array.isArray(data.pids) || !data.toUid) {

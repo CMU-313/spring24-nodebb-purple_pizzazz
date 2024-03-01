@@ -359,25 +359,60 @@ define('forum/topic/postTools', [
         }
         return { text: selectedText, pid: selectedPid, username: username };
     }
+    // Written using ChatGPT
+    // Creates link that display name as Anonymous without the link to user profile
+    function createAnonymousUserLink(originalLink) {
+        // Extract the existing username and data-uid
+        const usernameRegex = /data-username="([^"]+)"/;
+        const uidRegex = /data-uid="([^"]+)"/;
+        const usernameMatch = originalLink.match(usernameRegex);
+        const uidMatch = originalLink.match(uidRegex);
+        const existingUsername = usernameMatch ? usernameMatch[1] : '';
+        const existingUid = uidMatch ? uidMatch[1] : '';
+
+        // Create the modified string
+        const modifiedUsernameLink = `<a itemprop="author" data-username=${existingUsername} data-uid="${existingUid}">Anonymous</a> <small class="label group-label inline-block" style="background-color: lightblue;">{posts.user.accounttype}</small>`;
+        return modifiedUsernameLink;
+    }
+
+    // Initialize a variable to store the original username link as an HTML string
+    var originalUsernameLink;
+
+    // Wait for the document to be ready before storing the link
+    $(document).ready(function () {
+        originalUsernameLink = $('[itemprop="author"]').prop('outerHTML');
+    });
 
     // Used ChatGPT to help write code and type annotations
-    function anonymizePost(button) {
+    function anonymizePost(button, pid) {
         // Find the text span element within the clicked button
         var textSpan = button.find('.anonymous-text');
         console.assert(textSpan instanceof jQuery, 'Invalid textSpan type');
 
+        const modifiedUsernameLink = createAnonymousUserLink(originalUsernameLink);
+
         // Toggle the text
         if (textSpan.text() === 'Anonymize') {
             textSpan.text('Unanonymize');
-            $('[itemprop="author"]').text('Anonymous');
+            $('[itemprop="author"]').replaceWith(modifiedUsernameLink); // Replace the link with plain text
+            socket.emit('posts.makeAnonymous', pid, function (err) {
+                console.log('sockets emit anonymous');
+                if (err) {
+                    return alerts.error(err);
+                }
+            });
         } else {
             textSpan.text('Anonymize');
-            var actualUsername = $('[itemprop="author"]').data('username');
-            console.assert(typeof actualUsername === 'string', 'Invalid actualUsername type');
-            $('[itemprop="author"]').text(actualUsername);
+            // Restore the original username link
+            $('[itemprop="author"]').replaceWith(originalUsernameLink);
+            socket.emit('posts.makeUnanonymous', pid, function (err) {
+                console.log('sockets emit unanonymous');
+                if (err) {
+                    return alerts.error(err);
+                }
+            });
         }
-
-        // Find the icons within the clicked button
+        // Find the icons within the clicked utton
         var iconOff = button.find('[component="post/anonymous/off"]');
         var iconOn = button.find('[component="post/anonymous/on"]');
 
@@ -385,6 +420,7 @@ define('forum/topic/postTools', [
         // Toggle the visibility of the icons
         iconOff.toggleClass('hidden');
         iconOn.toggleClass('hidden');
+
         return false;
     }
 
