@@ -91,7 +91,7 @@ module.exports = function (Categories) {
         return data.category.topic_count;
     };
 
-    // TODO(William): Annotate function.
+
     Categories.buildTopicsSortedSet = async function (data) { // any -> null | Object[str | Array[str], any]
         const { cid } = data; // any
         let set = `cid:${cid}:tids`; // set: string
