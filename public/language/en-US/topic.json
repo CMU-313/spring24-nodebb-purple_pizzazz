@@ -120,6 +120,8 @@
     "move_topic": "Move Topic",
     "move_topics": "Move Topics",
     "move_post": "Move Post",
+    "answered": "Answered",
+    "unanswered": "Unanswered",
     "post_moved": "Post moved!",
     "fork_topic": "Fork Topic",
     "enter-new-topic-title": "Enter new topic title",

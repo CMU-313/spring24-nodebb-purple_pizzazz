@@ -1784,6 +1784,8 @@ describe('Topic\'s', () => {
             await sleep(2500);
             const didAnswer = await topics.getTopicField(tid, 'answered');
             assert.equal(didAnswer, 1);
+
+            assert.strictEqual(await db.sortedSetScore(`cid:${topic.categoryId}:tids:answered`, tid), 1);
         });
 
         it('should succeed if user is an instructor', async () => {
@@ -1795,6 +1797,8 @@ describe('Topic\'s', () => {
             await sleep(2500);
             const didAnswer = await topics.getTopicField(tid, 'answered');
             assert.equal(didAnswer, 1);
+
+            assert.strictEqual(await db.sortedSetScore(`cid:${topic.categoryId}:tids:answered`, tid), 1);
         });
     });
 

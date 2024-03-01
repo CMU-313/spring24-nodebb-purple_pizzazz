@@ -18,10 +18,13 @@ const translator = require('../translator');
 module.exports = function (Topics) {
     Topics.create = async function (data) {
         // This is an internal method, consider using Topics.post instead
+        // timestamp: number
         const timestamp = data.timestamp || Date.now();
 
+        // tid: number
         const tid = await db.incrObjectField('global', 'nextTid');
 
+        // topicData: object
         let topicData = {
             tid: tid,
             uid: data.uid,
@@ -39,17 +42,19 @@ module.exports = function (Topics) {
             topicData.tags = data.tags.join(',');
         }
 
+        // result: any
         const result = await plugins.hooks.fire('filter:topic.create', { topic: topicData, data: data });
         topicData = result.topic;
         await db.setObject(`topic:${topicData.tid}`, topicData);
 
+        // Array[str]
         const timestampedSortedSetKeys = [
             'topics:tid',
             `cid:${topicData.cid}:tids`,
             `cid:${topicData.cid}:uid:${topicData.uid}:tids`,
         ];
 
-        const scheduled = timestamp > Date.now();
+        const scheduled = timestamp > Date.now(); // bool
         if (scheduled) {
             timestampedSortedSetKeys.push('topics:scheduled');
         }
@@ -61,6 +66,7 @@ module.exports = function (Topics) {
                 `cid:${topicData.cid}:tids:votes`,
                 `cid:${topicData.cid}:tids:posts`,
                 `cid:${topicData.cid}:tids:views`,
+                `cid:${topicData.cid}:tids:answered`,
             ], 0, topicData.tid),
             user.addTopicIdToUser(topicData.uid, topicData.tid, timestamp),
             db.incrObjectField(`category:${topicData.cid}`, 'topic_count'),
@@ -73,7 +79,7 @@ module.exports = function (Topics) {
         }
 
         plugins.hooks.fire('action:topic.save', { topic: _.clone(topicData), data: data });
-        return topicData.tid;
+        return topicData.tid; // number
     };
 
     Topics.post = async function (data) {

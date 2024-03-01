@@ -91,9 +91,10 @@ module.exports = function (Categories) {
         return data.category.topic_count;
     };
 
-    Categories.buildTopicsSortedSet = async function (data) {
-        const { cid } = data;
-        let set = `cid:${cid}:tids`;
+
+    Categories.buildTopicsSortedSet = async function (data) { // any -> null | Object[str | Array[str], any]
+        const { cid } = data; // any
+        let set = `cid:${cid}:tids`; // set: string
         const sort = data.sort || (data.settings && data.settings.categoryTopicSort) || meta.config.categoryTopicSort || 'newest_to_oldest';
 
         if (sort === 'most_posts') {
@@ -102,7 +103,11 @@ module.exports = function (Categories) {
             set = `cid:${cid}:tids:votes`;
         } else if (sort === 'most_views') {
             set = `cid:${cid}:tids:views`;
-        }
+        } else if (sort === 'answered') {
+            set = `cid:${cid}:tids:answered`;
+        } else if (sort === 'unanswered') {
+            set = `cid:${cid}:tids:answered`;
+        } // set: string
 
         if (data.tag) {
             if (Array.isArray(data.tag)) {
@@ -110,22 +115,24 @@ module.exports = function (Categories) {
             } else {
                 set = [set, `tag:${data.tag}:topics`];
             }
-        }
+        } // set: string | Array[str]
+
 
         if (data.targetUid) {
             set = (Array.isArray(set) ? set : [set]).concat([`cid:${cid}:uid:${data.targetUid}:tids`]);
-        }
+        } // set: string | Array[str]
 
         const result = await plugins.hooks.fire('filter:categories.buildTopicsSortedSet', {
             set: set,
             data: data,
-        });
+        }); // result: any | null
+
         return result && result.set;
     };
 
-    Categories.getSortedSetRangeDirection = async function (sort) {
-        sort = sort || 'newest_to_oldest';
-        const direction = ['newest_to_oldest', 'most_posts', 'most_votes', 'most_views'].includes(sort) ? 'highest-to-lowest' : 'lowest-to-highest';
+    Categories.getSortedSetRangeDirection = async function (sort) { // string | null -> string, string
+        sort = sort || 'newest_to_oldest'; // string
+        const direction = ['newest_to_oldest', 'most_posts', 'most_votes', 'most_views', 'answered'].includes(sort) ? 'highest-to-lowest' : 'lowest-to-highest';
         const result = await plugins.hooks.fire('filter:categories.getSortedSetRangeDirection', {
             sort: sort,
             direction: direction,
