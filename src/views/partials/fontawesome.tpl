@@ -731,6 +731,8 @@
         <i class="fa fa-usb"></i>
         <i class="fa fa-usd"></i>
         <i class="fa fa-user"></i>
+        ### {# Icon for anonymous toggle. #}
+        <i class="fa fa-user-alt-slash"></i>
         <i class="fa fa-user-circle"></i>
         <i class="fa fa-user-circle-o"></i>
         <i class="fa fa-user-md"></i>

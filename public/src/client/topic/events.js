@@ -39,6 +39,8 @@ define('forum/topic/events', [
 
         'posts.bookmark': togglePostBookmark,
         'posts.unbookmark': togglePostBookmark,
+        'posts.makeAnonymous': toggleAnonymous,
+        'posts.makeUnanonymous': toggleAnonymous,
 
         'posts.upvote': togglePostVote,
         'posts.downvote': togglePostVote,
@@ -219,6 +221,15 @@ define('forum/topic/events', [
 
         el.find('[component="post/bookmark/on"]').toggleClass('hidden', !data.isBookmarked);
         el.find('[component="post/bookmark/off"]').toggleClass('hidden', data.isBookmarked);
+    }
+
+    function toggleAnonymous(data) {
+        const el = $('[data-pid="' + data.post.pid + '"] [component="post/anonymous"]').filter(function (index, el) {
+            return parseInt($(el).closest('[data-pid]').attr('data-pid'), 10) === parseInt(data.post.pid, 10);
+        });
+        if (!el.length) {
+            return false;
+        }
     }
 
     function togglePostVote(data) {

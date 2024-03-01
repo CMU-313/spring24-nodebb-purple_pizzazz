@@ -31,6 +31,8 @@ describe('Post\'s', () => {
     let postData;
     let topicData;
     let cid;
+    let instructorUid;
+    let studentUid;
 
     before((done) => {
         async.series({
@@ -49,6 +51,12 @@ describe('Post\'s', () => {
                     description: 'Test category created by testing script',
                 }, next);
             },
+            instructorUid: function (next) {
+                user.create({ username: 'instructoracct', accounttype: 'instructor' }, next);
+            },
+            studentUid: function (next) {
+                user.create({ username: 'studentacct', accounttype: 'student' }, next);
+            },
         }, (err, results) => {
             if (err) {
                 return done(err);
@@ -56,6 +64,8 @@ describe('Post\'s', () => {
 
             voterUid = results.voterUid;
             voteeUid = results.voteeUid;
+            instructorUid = results.instructorUid;
+            studentUid = results.studentUid;
             globalModUid = results.globalModUid;
             cid = results.category.cid;
 
@@ -961,6 +971,75 @@ describe('Post\'s', () => {
             done();
         });
     });
+    /* Attempted to write test cases for the anonymizing button. However,the functional code relies on button inputs.
+     As a result, I was unable to really write test cases that actively test the functionality of the button.
+     If the backend was successfully implemented, I could have tested how the boolean variable corresponding to
+     whether a post is anonymized or not get changed based on certain actions. */
+
+    // describe('toggleAnonymous', () => {
+    //     const textSpan = button.find('.anonymous-text');
+    //     let originalUsernameLink;
+
+    //     originalUsernameLink = $('[itemprop="author"]').prop('outerHTML');
+
+    //     it('should sync anonymize button up with username', async () => {
+    //         if (textSpan.text() === 'Anonymize') {
+    //             assert($('[itemprop="author"]').text() === originalUsernameLink);
+    //         } else {
+    //             assert($('[itemprop="author"]').text() !== originalUsernameLink);
+    //         }
+    //     });
+    // });
+
+    /* The following test was written with help from ChatGPT but it doesn't pass because of
+    "ReferenceError: define is not defined"
+
+    describe('toggleAnonymous', () => {
+        let postContainer;
+        let originalUsernameLink;
+        const $ = require('jquery');
+        const { anonymizePost } = require('../public/src/client/topic/postTools');
+
+        beforeEach(() => {
+            // Set up your test environment
+            // For example, create a dummy post container and store the original username link
+            postContainer = $('<div id="postContainer"></div>');
+            originalUsernameLink = $('<a href="#" itemprop="author">Original Username</a>').prop('outerHTML');
+            $('body').append(postContainer); // Add the post container to the DOM
+            postContainer.on('click', '[component="post/anonymous"]', function (event) {
+                anonymizePost($(this)); // Call the anonymizePost function when the event is triggered
+            });
+        });
+
+        afterEach(() => {
+            // Clean up after each test
+            postContainer.remove(); // Remove the post container from the DOM
+        });
+
+        it('should anonymize post when anonymize button is clicked', () => {
+            // Simulate a click event on the anonymize button
+            const anonymizeButton = $('<button component="post/anonymous"></button>');
+            postContainer.append(anonymizeButton); // Add the button to the post container
+
+            // Trigger a click event on the anonymize button
+            anonymizeButton.trigger('click');
+
+            // Check if the post is anonymized
+            assert(postContainer.find('[itemprop="author"]').text()!==originalUsernameLink,'Not anonymous');
+        });
+
+        it('should unanonymize post when unanonymize button is clicked', () => {
+            // Simulate a click event on the unanonymize button
+            const unanonymizeButton = $('<button component="post/anonymous"></button>');
+            postContainer.append(unanonymizeButton); // Add the button to the post container
+
+            // Trigger a click event on the unanonymize button
+            unanonymizeButton.trigger('click');
+
+            // Check if the post is unanonymized
+            assert(postContainer.find('[itemprop="author"]').text() === originalUsernameLink, 'unanonymized');
+        });
+    }); */
 
     describe('post queue', () => {
         let uid;
@@ -1226,6 +1305,34 @@ describe('Post\'s', () => {
                 assert(events);
                 assert.strictEqual(events.length, 0);
             });
+        });
+    });
+
+    describe('Account Type', () => {
+        it('should display student account as student', async () => {
+            console.log(studentUid);
+            const message = await topics.post({
+                uid: studentUid,
+                cid,
+                title: 'Account type testing - student',
+                content: 'Some text here for the OP',
+            });
+
+            console.log('ufkdljaksjfdkaskflsdjfsldf');
+            console.log(message);
+
+            assert.equal(message.postData.user.accounttype, 'student');
+        });
+
+        it('should display instructor account as instructor', async () => {
+            const message = await topics.post({
+                uid: instructorUid,
+                cid,
+                title: 'Account type testing - instructor',
+                content: 'Some text here for the OP',
+            });
+
+            assert.equal(message.postData.user.accounttype, 'instructor');
         });
     });
 });

@@ -63,8 +63,7 @@ define('forum/topic/postTools', [
 
     PostTools.toggle = function (pid, isDeleted) {
         const postEl = components.get('post', 'pid', pid);
-
-        postEl.find('[component="post/quote"], [component="post/bookmark"], [component="post/reply"], [component="post/flag"], [component="user/chat"]')
+        postEl.find('[component="post/quote"], [component="post/bookmark"], [component="post/anonymous"], [component="post/reply"], [component="post/flag"], [component="user/chat"]')
             .toggleClass('hidden', isDeleted);
 
         postEl.find('[component="post/delete"]').toggleClass('hidden', isDeleted).parent().attr('hidden', isDeleted ? '' : null);
@@ -114,6 +113,16 @@ define('forum/topic/postTools', [
 
         postContainer.on('click', '[component="post/bookmark"]', function () {
             return bookmarkPost($(this), getData($(this), 'data-pid'));
+        });
+
+        /**
+         * Attaches event listener to handle anonymize/unanonymize button clicks.
+         * @param {jQuery.Event} event - The click event.
+         * @returns {boolean} - Returns false to prevent the default link behavior.
+         */
+        postContainer.on('click', '[component="post/anonymous"]', function (event) {
+            console.assert(event instanceof jQuery.Event, 'Invalid event parameter');
+            return anonymizePost($(this));
         });
 
         postContainer.on('click', '[component="post/upvote"]', function () {
@@ -349,6 +358,70 @@ define('forum/topic/postTools', [
             range.detach();
         }
         return { text: selectedText, pid: selectedPid, username: username };
+    }
+    // Written using ChatGPT
+    // Creates link that display name as Anonymous without the link to user profile
+    function createAnonymousUserLink(originalLink) {
+        // Extract the existing username and data-uid
+        const usernameRegex = /data-username="([^"]+)"/;
+        const uidRegex = /data-uid="([^"]+)"/;
+        const usernameMatch = originalLink.match(usernameRegex);
+        const uidMatch = originalLink.match(uidRegex);
+        const existingUsername = usernameMatch ? usernameMatch[1] : '';
+        const existingUid = uidMatch ? uidMatch[1] : '';
+
+        // Create the modified string
+        const modifiedUsernameLink = `<a itemprop="author" data-username=${existingUsername} data-uid="${existingUid}">Anonymous</a> <small class="label group-label inline-block" style="background-color: lightblue;">{posts.user.accounttype}</small>`;
+        return modifiedUsernameLink;
+    }
+
+    // Initialize a variable to store the original username link as an HTML string
+    var originalUsernameLink;
+
+    // Wait for the document to be ready before storing the link
+    $(document).ready(function () {
+        originalUsernameLink = $('[itemprop="author"]').prop('outerHTML');
+    });
+
+    // Used ChatGPT to help write code and type annotations
+    function anonymizePost(button, pid) {
+        // Find the text span element within the clicked button
+        var textSpan = button.find('.anonymous-text');
+        console.assert(textSpan instanceof jQuery, 'Invalid textSpan type');
+
+        const modifiedUsernameLink = createAnonymousUserLink(originalUsernameLink);
+
+        // Toggle the text
+        if (textSpan.text() === 'Anonymize') {
+            textSpan.text('Unanonymize');
+            $('[itemprop="author"]').replaceWith(modifiedUsernameLink); // Replace the link with plain text
+            socket.emit('posts.makeAnonymous', pid, function (err) {
+                console.log('sockets emit anonymous');
+                if (err) {
+                    return alerts.error(err);
+                }
+            });
+        } else {
+            textSpan.text('Anonymize');
+            // Restore the original username link
+            $('[itemprop="author"]').replaceWith(originalUsernameLink);
+            socket.emit('posts.makeUnanonymous', pid, function (err) {
+                console.log('sockets emit unanonymous');
+                if (err) {
+                    return alerts.error(err);
+                }
+            });
+        }
+        // Find the icons within the clicked utton
+        var iconOff = button.find('[component="post/anonymous/off"]');
+        var iconOn = button.find('[component="post/anonymous/on"]');
+
+        console.assert(iconOff instanceof jQuery && iconOn instanceof jQuery, 'Invalid icon type');
+        // Toggle the visibility of the icons
+        iconOff.toggleClass('hidden');
+        iconOn.toggleClass('hidden');
+
+        return false;
     }
 
     function bookmarkPost(button, pid) {

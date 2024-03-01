@@ -1,5 +1,5 @@
 
-# Added Answeredness Feature
+# Topic Answeredness Feature
 ------------------------------------------------
 
 Using the new "mark as answered" feature differs depending on your status in the website.
@@ -77,19 +77,37 @@ The changes to the code that facilitated this feature are already well-covered b
 
 However, to test that the changes to the database when a topic is marked answered affect the sorting as well, some assertions are added to some answeredness tests in test/topics.js.
 
-=======
+# Anonymizing Posts Feature
+------------------------------------------------
 
-<-- To be determined at a later time. -->
+The anonymizing posts feature allows users to toggle between displaying their username or anonymizing their posts. When a user chooses to anonymize their post, their username is replaced with "Anonymous" and the profile link associated with it is removed so that other users can't visit their profile. Posters also have the option of reverting their anonymity if they so desire. The anonymizing posts feature is implemented as a button within the post list dropdown. Users can easily toggle the anonymization of their posts with a simple click.
 
-# Getting started
+## Usage: 
+To anonymize your posts:
+1. Navigate to the post you want to anonymize.
+2. Locate the dropdown menu associated with the post.
+3. Click on the "Anonymize" button.
+4. Your username will be replaced with "Anonymous" and the profile link will be removed.
 
-# New Features
+To revert to displaying your username:
+1. Follow the same steps as above.
+2. Click on the "De-anonymize" button.
 
-# Testing
+- Anonymizing your posts will remove any association with your username and profile link.
+- De-anonymizing your posts will revert them to displaying your username and profile link.
 
-## User tests
+Known issues with the anonymization button: 
+- The visual changes made to the post is only available client-side. Other users may not see the anonymization changes.
+- Pressing the button currently causes an error asserting that "posts.makeAnonymous" is not a function.
+- There might be buggy interactions between the toggling anonymous feature and labeling students/instructors feature.
 
-## Automated tests
+--------
+Files modified include public/src/client/topic/events.js, public/src/client/topic/postTools.js, src/posts/anonymize.js, src/socket.io/posts/anonymize.js, themes/nodebb-theme-persona/templates/partials/topic/post-menu-list.tpl, etc. 
+
+
+# Account type markers
+Upon creating an account, users have the ability to select between an "Instructor" account and a "Student" account. Previously, this did not display anywhere. Now, upon sending a message, there is a box for the user's account type right next to the username.
+You can test this manually by simply making an account and making a new post; the marker should show up. In addition, it can be tested using the tests in tests/posts.js under "Account Type". These tests check that the user's account type is correctly stored in a post, which means that the front-end will be able to pull it up. The tests check both possible account types (instructor and student), so the tests added are sufficient.
 
 
 -- Team Purple_Pizzazz

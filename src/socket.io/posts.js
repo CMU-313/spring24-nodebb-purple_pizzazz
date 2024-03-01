@@ -17,6 +17,7 @@ const SocketPosts = module.exports;
 
 require('./posts/votes')(SocketPosts);
 require('./posts/tools')(SocketPosts);
+require('./posts/anonymize')(SocketPosts);
 
 SocketPosts.getRawPost = async function (socket, pid) {
     const canRead = await privileges.posts.can('topics:read', pid, socket.uid);

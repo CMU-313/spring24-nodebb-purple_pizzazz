@@ -84,6 +84,18 @@
         </a>
     </li>
     {{{ end }}}
+    <!-- IF posts.display_moderator_tools -->
+    <li>
+        <a component="post/anonymous" role="menuitem" tabindex="-1" href="#" data-anonymized="{posts.anonymized}">
+            <span class="menu-icon">
+                <i component="post/anonymous/off" class="fa fa-fw fa-user <!-- IF !posts.anonymized -->hidden<!-- ENDIF !posts.anonymized -->"></i>
+                <i component="post/anonymous/on" class="fa fa-fw fa-user-secret <!-- IF posts.anonymized -->hidden<!-- ENDIF posts.anonymized -->"></i>
+            </span>
+            <span class="anonymous-text">[[topic:Anonymize]]</span>
+        </a>
+    </li>
+    <!-- END -->
+
 
     <li>
         <a role="menuitem" tabindex="-1" href="#" data-clipboard-text="{posts.absolute_url}">
