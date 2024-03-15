@@ -1,5 +1,7 @@
 'use strict';
 
+const Iroh = require('iroh');
+
 const meta = require('../meta');
 const db = require('../database');
 const flags = require('../flags');
@@ -236,6 +238,19 @@ module.exports = function (Posts) {
             db.setCount(`pid:${postData.pid}:upvote`),
             db.setCount(`pid:${postData.pid}:downvote`),
         ]);
+
+        // iroh code
+        console.log('starting iroh');
+        const code = `const votes = upvotes - downvotes`;
+        const stage = new Iroh.Stage(code);
+        const listener = stage.addListener(Iroh.VAR);
+        listener.on('after', (e) => {
+            console.log(e.name, '=>', e.value);
+        });
+        // eslint-disable-next-line no-eval
+        eval(stage.script);
+        console.log('iroh done');
+
         postData.upvotes = upvotes;
         postData.downvotes = downvotes;
         postData.votes = postData.upvotes - postData.downvotes;
