@@ -15,9 +15,9 @@
         "test": "npx tsc && nyc --reporter=html --reporter=text-summary mocha",
         "coverage": "nyc report --reporter=text-lcov > ./coverage/lcov.info",
         "coveralls": "nyc report --reporter=text-lcov | coveralls && rm -r coverage",
-	"build": "babel src/ -d src_babel/",
+        "build": "babel src/ -d src_babel/",
         "prepublish": "npm build",
-        "flow": "flow"
+	"flow": "flow"
     },
     "nyc": {
         "exclude": [
@@ -150,7 +150,7 @@
     },
     "devDependencies": {
         "@apidevtools/swagger-parser": "^10.1.0",
-	"@babel/cli": "^7.23.9",
+        "@babel/cli": "^7.23.9",
         "@babel/core": "^7.24.0",
         "@babel/preset-flow": "^7.24.0",
         "@commitlint/cli": "17.3.0",
@@ -167,7 +167,7 @@
         "eslint": "^8.31.0",
         "eslint-config-nodebb": "0.2.1",
         "eslint-plugin-import": "2.26.0",
-	"flow-bin": "^0.231.0",
+        "flow-bin": "^0.231.0",
         "grunt": "1.5.3",
         "grunt-contrib-watch": "1.1.0",
         "husky": "8.0.2",
