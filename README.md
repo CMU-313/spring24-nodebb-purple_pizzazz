@@ -2,7 +2,6 @@
 
 ![](https://raw.githubusercontent.com/CMU-313/spring24-nodebb-purple_pizzazz/activity-resources/image.svg)
 
-
 # ![NodeBB](public/images/sm-card.png) 
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
@@ -93,3 +92,6 @@ NodeBB is licensed under the **GNU General Public License v3 (GPL-3)** (http://w
     * [TypeScript for New Programmers](https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html)
     * [TypeScript for JavaScript Programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
     * [JavaScript to TypeScript Translation](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html#moving-to-typescript-files)
+
+## Deep Scan
+[![DeepScan grade](https://deepscan.io/api/teams/23434/projects/26742/branches/852529/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=23434&pid=26742&bid=852529)
