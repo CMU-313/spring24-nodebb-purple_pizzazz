@@ -3,6 +3,8 @@
 
 const db = require('../database');
 
+let num : number = "hi";
+
 module.exports = function (Topics) {
     // This function sets the answered field to 1 to indicate that
     // the question has been answered for all
