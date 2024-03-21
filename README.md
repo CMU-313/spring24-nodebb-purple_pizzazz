@@ -93,5 +93,5 @@ NodeBB is licensed under the **GNU General Public License v3 (GPL-3)** (http://w
     * [TypeScript for JavaScript Programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
     * [JavaScript to TypeScript Translation](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html#moving-to-typescript-files)
 
-## Deep Scan
+## DeepScan
 Main: [![DeepScan grade](https://deepscan.io/api/teams/23434/projects/26742/branches/852529/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=23434&pid=26742&bid=852529)
