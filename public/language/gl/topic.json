@@ -62,6 +62,7 @@
     "ignoring_topic.message": "Xa non verás este fío na lista de fíos non lidos. Serás notificado cando sexas mencionado ou a túa publicación sexa votada.",
     "login_to_subscribe": "Por favor, identifícate para subscribirte a este tema.",
     "markAsUnreadForAll.success": "Publicación marcada como non lida para todos.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Marcar coma non lido",
     "mark_unread.success": "Tema marcado como non lido",
     "watch": "Vixiar",

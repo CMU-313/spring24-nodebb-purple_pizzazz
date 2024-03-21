@@ -62,6 +62,7 @@
     "ignoring_topic.message": "Et enää näe tätä aihetta lukemattomat aiheet listauksessa. Saat ilmoituksen, kun joku mainitsee sinut tai viestistäsi tykätään.",
     "login_to_subscribe": "Ole hyvä ja rekisteröidy tai kirjaudu sisään tilataksesi tämän aiheen.",
     "markAsUnreadForAll.success": "Aihe merkitty lukemattomaksi kaikille.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Merkitse lukemattomaksi",
     "mark_unread.success": "Aihe on merkitty lukemattomaksi",
     "watch": "Seuraa",

@@ -62,6 +62,7 @@
     "ignoring_topic.message": "Vous ne verrez plus ce sujet dans la liste des sujets non lus. Vous serez notifié lorsque vous serez mentionné ou que quelqu'un votera pour votre message.",
     "login_to_subscribe": "Veuillez vous enregistrer ou vous connecter afin de vous abonner à ce sujet.",
     "markAsUnreadForAll.success": "Sujet marqué comme non lu pour tout le monde.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Marquer comme non-lu",
     "mark_unread.success": "Sujet marqué comme non lu.",
     "watch": "Suivre",

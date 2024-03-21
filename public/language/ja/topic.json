@@ -62,6 +62,7 @@
     "ignoring_topic.message": "あなたは、これ以上この未読スレッドを一覧に表示しておくことが出来なくなります。追跡するか、あなたの投稿が高評価を受けると通知されます。",
     "login_to_subscribe": "このスレッドを購読するためにログインが必要です。",
     "markAsUnreadForAll.success": "すべてのスレッドを未読にしました。",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "未読としてマーク",
     "mark_unread.success": "スレッドは未読にマークされました。",
     "watch": "ウォッチ",

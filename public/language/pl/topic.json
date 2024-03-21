@@ -62,6 +62,7 @@
     "ignoring_topic.message": "Nie zobaczysz już tego tematu na liście nieprzeczytanych. Otrzymasz powiadomienie, kiedy ktoś o Tobie wspomni lub zagłosuje na Twój post.",
     "login_to_subscribe": "Zarejestruj lub zaloguj się, aby subskrybować ten temat.",
     "markAsUnreadForAll.success": "Temat oznaczony jako nieprzeczytany dla wszystkich",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Oznacz jako nieprzeczytany",
     "mark_unread.success": "Temat oznaczony jako nieprzeczytany",
     "watch": "Obserwuj",

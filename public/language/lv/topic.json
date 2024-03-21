@@ -62,6 +62,7 @@
     "ignoring_topic.message": "Šis temats vairs nebūs redzams nelasīto tematu sarakstā. Tev paziņos, kad tiksi pieminēts(-ēta), vai kāds balsos \"par\" Tavu rakstu.",
     "login_to_subscribe": "Lūdzu, reģistrēties vai ielogoties, lai abonētu šo tematu.",
     "markAsUnreadForAll.success": "Temats atzīmēts kā nelasīts visiem.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Atzīmēt kā nelasītu",
     "mark_unread.success": "Temats atzīmēts kā nelasīts.",
     "watch": "Novērošana",

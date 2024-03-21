@@ -62,6 +62,7 @@
     "ignoring_topic.message": "Nuk do ta shihni më këtë temë në listën e temave të palexuara. Do të njoftoheni kur të përmendeni ose kur postimi juaj të votohet.",
     "login_to_subscribe": "Ju lutemi regjistrohuni për të marrë njoftime në këtë temë.",
     "markAsUnreadForAll.success": "Tema u shënua si e palexuar për të gjithë.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Shëno si të pa lexuar",
     "mark_unread.success": "Tema u shënua si e palexuar ",
     "watch": "Ndiqe",

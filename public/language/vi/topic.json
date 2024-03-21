@@ -62,6 +62,7 @@
     "ignoring_topic.message": "Bạn sẽ không thấy chủ đề này trong danh sách chủ đề chưa đọc. Bạn sẽ nhận thông báo khi bạn được đề cập hoặc bài viết của bạn được ủng hộ.",
     "login_to_subscribe": "Vui lòng đăng ký hoặc đăng nhập để theo dõi chủ đề này",
     "markAsUnreadForAll.success": "Chủ đề đã được đánh dấu là chưa đọc toàn bộ",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Đánh dấu chưa đọc",
     "mark_unread.success": "Đã đánh dấu chủ đề chưa đọc.",
     "watch": "Xem",

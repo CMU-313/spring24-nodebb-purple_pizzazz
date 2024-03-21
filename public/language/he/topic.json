@@ -62,6 +62,7 @@
     "ignoring_topic.message": "נושא זה לא יופיע יותר ברשימת הנושאים שלא נקראו. תקבלו הודעה כשיזכירו אתכם או כשהפוסט שלכם יקבל הצבעה חיובית",
     "login_to_subscribe": "הירשמו או התחברו בכדי לעקוב אחר נושא זה.",
     "markAsUnreadForAll.success": "נושא זה סומן כלא נקרא לכולם.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "סימון כלא נקרא",
     "mark_unread.success": "הנושא סומן כלא נקרא.",
     "watch": "מעקב",

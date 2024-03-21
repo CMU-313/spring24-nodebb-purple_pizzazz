@@ -62,6 +62,7 @@
     "ignoring_topic.message": "Nem fogod látni ezt a témakört az olvasatlan témakörök listáján. Értesítést fogsz kapni, mikor valaki megemlít téged, vagy kedveli a hozzászólásod.",
     "login_to_subscribe": "Kérlek, regisztrálj vagy lépj be, hogy feliratkozz erre a témakörre.",
     "markAsUnreadForAll.success": "Témakör olvasatlannak jelölve mindenki számára.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Megjelölés olvasatlanként",
     "mark_unread.success": "Témakör olvasatlannak jelölve.",
     "watch": "Figyelés",

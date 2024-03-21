@@ -62,6 +62,7 @@
     "ignoring_topic.message": "You will no longer see this topic in the unread topics list.  You will be notified when you are mentioned or your post is up voted.",
     "login_to_subscribe": "المرجو إنشاء حساب أو تسجيل الدخول حتى يمكنك متابعة هذا الموضوع.",
     "markAsUnreadForAll.success": "تم تحديد الموضوع على أنه غير مقروء.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "حدده كغير مقروء",
     "mark_unread.success": "الموضوع حدد على أنه غير مقروء",
     "watch": "مراقبة",

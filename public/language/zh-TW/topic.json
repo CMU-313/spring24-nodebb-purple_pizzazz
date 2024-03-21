@@ -62,6 +62,7 @@
     "ignoring_topic.message": "您將不會在未讀主題列表裡看到這個主題，但在被提及以及貼文被點贊時仍將收到通知。",
     "login_to_subscribe": "請註冊或登入後，再訂閱此主題。",
     "markAsUnreadForAll.success": "將全部主題標為未讀。",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "標記為未讀",
     "mark_unread.success": "主題已被標記為未讀。",
     "watch": "關注",

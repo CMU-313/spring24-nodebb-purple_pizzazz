@@ -62,6 +62,7 @@
     "ignoring_topic.message": "Bu konuyu artık \"Okunmamış\" listesinde görmeyeceksiniz. Eğer bir iletide bahsedilirseniz veya iletiniz oylanırsa bildirim alacaksınız.",
     "login_to_subscribe": "Lütfen bu konuyu takip etmek için üye olun veya giriş yapın.",
     "markAsUnreadForAll.success": "Başlık herkes için okunmadı olarak işaretlendi.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Okunmadı olarak işaretle",
     "mark_unread.success": "Başlık okunmamış olarak işaretlendi.",
     "watch": "Takip",

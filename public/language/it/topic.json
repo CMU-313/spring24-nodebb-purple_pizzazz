@@ -62,6 +62,7 @@
     "ignoring_topic.message": "Non vedrai più questa discussione tra la lista dei non letti. Sarai notificato in caso qualcuno ti menzioni o se un tuo post viene votato positivamente.",
     "login_to_subscribe": "Si prega di accedere o registrarsi per potersi iscrivere a questa discussione.",
     "markAsUnreadForAll.success": "Discussione segnata come non letta per tutti.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Segna come non letto",
     "mark_unread.success": "Discussione è stata marcata come non letta.",
     "watch": "Segui",

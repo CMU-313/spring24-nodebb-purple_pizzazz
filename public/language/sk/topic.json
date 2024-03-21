@@ -62,6 +62,7 @@
     "ignoring_topic.message": "Už nebudete naďalej vidieť túto tému v zozname neprečítaných. Budete informovaný, keď sa niekto zmieni o Vašom príspevku alebo mu dá hlas.",
     "login_to_subscribe": "Prosím Zaregistrujte sa alebo sa Prihláste, aby ste mohli odoberať túto Tému",
     "markAsUnreadForAll.success": "Téma označená ako neprečítaná pre všetkých.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Označiť ako neprečítané",
     "mark_unread.success": "Téma označená ako neprečítaná.",
     "watch": "Sledovať",

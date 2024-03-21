@@ -62,6 +62,7 @@
     "ignoring_topic.message": "Դուք այլևս չեք տեսնի այս թեման չկարդացված թեմաների ցանկում: Դուք կտեղեկացվեք, երբ ձեզ հիշատակեն կամ ձեր գրառումը քվեարկվի:",
     "login_to_subscribe": "Խնդրում ենք գրանցվել կամ մուտք գործել՝ այս թեմային բաժանորդագրվելու համար:",
     "markAsUnreadForAll.success": "Թեման նշված է որպես չկարդացված բոլորի համար:",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Նշել որպես չընթերցված",
     "mark_unread.success": "Թեման նշվեց որպես չընթերցված",
     "watch": "Դիտել",

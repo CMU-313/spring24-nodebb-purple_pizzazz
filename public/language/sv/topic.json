@@ -62,6 +62,7 @@
     "ignoring_topic.message": "Du kommer inte längre se detta ämne i listan olästa ämnen. Du kommer att meddelas när du nämns eller ditt inlägg är upp röstat.",
     "login_to_subscribe": "Var god registrera eller logga in för att kunna prenumerera på detta ämne.",
     "markAsUnreadForAll.success": "Ämne markerat som oläst av alla.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Markera som oläst",
     "mark_unread.success": "Ämne markerat som oläst.",
     "watch": "Bevaka",

@@ -62,6 +62,7 @@
     "ignoring_topic.message": "You will no longer see this topic in the unread topics list.  You will be notified when you are mentioned or your post is up voted.",
     "login_to_subscribe": "Te rugăm să te înregistrezi sau să te autentifici ca să te poți abona la acest subiect.",
     "markAsUnreadForAll.success": "Subiect marcat ca citit pentru toți.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Mark unread",
     "mark_unread.success": "Topic marked as unread.",
     "watch": "Urmărește",

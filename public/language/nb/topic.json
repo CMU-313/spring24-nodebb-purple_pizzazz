@@ -62,6 +62,7 @@
     "ignoring_topic.message": "Du vil ikke lenger se denne tråden blandt de uleste trådene. Du vil få et varsel når du blir nevnt eller din tråd blir oppstemt.",
     "login_to_subscribe": "Vennligst registrer deg eller logg inn for å abonnere på denne tråden.",
     "markAsUnreadForAll.success": "Tråd markert som ulest for alle.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Merk som ulest",
     "mark_unread.success": "Tråd merket som ulest.",
     "watch": "Overvåk",

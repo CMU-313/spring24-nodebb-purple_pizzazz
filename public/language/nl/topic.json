@@ -62,6 +62,7 @@
     "ignoring_topic.message": "Dit onderwerp zal niet meer verschijnen in de lijst van ongelezen berichten. U zult enkel een melding ontvangen wanneer u wordt genoemd, of wanneer er een positieve stem op uw reactie wordt gegeven.",
     "login_to_subscribe": "Log in or registreer om dit onderwerp te volgen.",
     "markAsUnreadForAll.success": "Onderwerp is voor iedereen als ongelezen gemarkeerd.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Ongelezen markeren",
     "mark_unread.success": "Onderwerp is als ongelezen gemarkeerd.",
     "watch": "Volgen",

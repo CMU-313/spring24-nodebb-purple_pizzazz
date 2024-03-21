@@ -62,6 +62,7 @@
     "ignoring_topic.message": "To temo ne boste videli v seznamu neprebranih tem. Prav tako ne boste dobili obvestila, če bo nekdo objavil v tej temi. ",
     "login_to_subscribe": "Če se želite naročiti na to temo se morate najprej prijaviti oziroma opraviti registracijo.",
     "markAsUnreadForAll.success": "Tema označena kot neprebrana za vse.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Označi kot neprebrano",
     "mark_unread.success": "Tema označena kot neprebrana.",
     "watch": "Spremljaj",

@@ -62,6 +62,7 @@
     "ignoring_topic.message": "Ви більше не будете бачити цю тему в списку непрочитаних. Вас буде сповіщено коли хтось вас згадає або за ваш пост буде проголосовано.",
     "login_to_subscribe": "Будь ласка, зареєструйтесь або увійдіть щоб підписатися на цю тему.",
     "markAsUnreadForAll.success": "Тема відмічена для всіх як непрочитана.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Помітити непрочитаною",
     "mark_unread.success": "Тема помічена непрочитаною",
     "watch": "Стежити",

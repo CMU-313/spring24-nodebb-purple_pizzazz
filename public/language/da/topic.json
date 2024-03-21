@@ -62,6 +62,7 @@
     "ignoring_topic.message": "You will no longer see this topic in the unread topics list.  You will be notified when you are mentioned or your post is up voted.",
     "login_to_subscribe": "Venligt registrer eller login for at abbonere på dette emne.",
     "markAsUnreadForAll.success": "Emnet er market ulæst for alle.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Marker ulæste",
     "mark_unread.success": "Emne markeret som ulæst.",
     "watch": "Overvåg",

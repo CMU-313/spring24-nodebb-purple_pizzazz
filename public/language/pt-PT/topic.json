@@ -62,6 +62,7 @@
     "ignoring_topic.message": "Não verás mais este tópico na tua lista de tópicos por ler. Serás notificado sempre que fores mencionado ou o teu tópico seja votado favoravelmente.",
     "login_to_subscribe": "Por favor regista-te ou inicia sessão para subscreveres este tópico.",
     "markAsUnreadForAll.success": "Tópico marcado como \"não lido\" para todos.",
+    "markAsAnsweredForAll.success" : "Mark question as answered for all.",
     "mark_unread": "Marcar como não lido",
     "mark_unread.success": "Tópico marcado como \"não lido\".",
     "watch": "Ver",
