@@ -184,7 +184,7 @@
             return this.element;
         },
         destroy: function () {
-            unbindEvents(this);
+            unbindEvents();
             show(this);
             $.data(this, 'plugin_' + pluginName, null);
             return this.element;
